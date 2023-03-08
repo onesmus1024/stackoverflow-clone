@@ -1,0 +1,76 @@
+<nav class="nav-bar">
+    <div class="menu-icon">
+        <mat-icon  (click)="toggleSideBar($event)">menu</mat-icon>
+    </div>
+    <div class="logo">
+       
+        <img  class="icon" src="../../../assets/logo-stackoverflow.svg" alt="stackoverflow logo">
+        <p>stack<span class="overflow">overflow</span></p>
+    </div>
+
+    <div class="search">
+        
+        <form>
+            <input type="text" placeholder="Search">
+            <button type="submit">
+                <mat-icon class="search-icon">search</mat-icon>
+            </button>
+        </form>
+    </div>
+
+    <div class="links">
+        <a routerLink="login" class="login">Login</a>
+        <a routerLink="signup" class="signup">Sign Up</a>
+    </div>
+</nav>
+
+
+<aside #sideBar class="side-bar">
+    <nav class="side-bar">
+        <ul>
+            <li>
+                <a routerLink="/home">
+                    <mat-icon>home</mat-icon>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="public">
+                    <mat-icon>public</mat-icon>
+                    <span>Public</span>
+                </a>
+            </li>
+            <ul>
+            
+                <li>
+                    <a routerLink="questions">
+                        <mat-icon>question_answer</mat-icon>
+                        <span>Questions</span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="users">
+                        <mat-icon>people</mat-icon>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <!-- tags -->
+                <li>
+                    <a routerLink="tags">
+                        <mat-icon>local_offer</mat-icon>
+                        <span>Tags</span>
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="companies">
+                        <mat-icon>business</mat-icon>
+                        <span>Companies</span>
+                    </a>
+                </li>
+            </ul>
+        </ul>
+        
+    </nav>
+
+</aside>

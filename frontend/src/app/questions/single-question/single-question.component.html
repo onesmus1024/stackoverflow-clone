@@ -1,0 +1,24 @@
+
+<div class="single-question">
+    <div class="space">
+      
+    </div>
+    <div class="votes">
+        <p>{{question?.votes?.length}} votes</p>
+    </div>
+    <div class="answers">
+        <p>{{question?.answers?.length}} answers</p>
+    </div>
+    <div class="views">
+        <p>{{question?.views}} views</p>
+    </div>
+    <div class="question">
+        <a routerLink="{{question?.id}}"><P>{{question?.question}}</P></a>
+    </div>
+    <div class="tags">
+        <p>{{question!.tags[0].tag}}</p>
+    </div>
+    <div class="user">
+        <p>{{question?.user?.name}}</p>
+    </div>
+</div>

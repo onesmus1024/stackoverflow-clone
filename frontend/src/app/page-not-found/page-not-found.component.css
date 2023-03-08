@@ -1,0 +1,17 @@
+
+.page-not-found {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.page-not-found h1 {
+  font-size: 100px;
+  font-weight: 900;
+  color: #0a95ff;
+}
+
+.page-not-found p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #92b3cb;
+}
