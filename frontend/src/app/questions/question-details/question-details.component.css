@@ -61,6 +61,15 @@
 
 .tags{
     grid-area: tags;
+    grid-area: tags;
+    border: 1px solid #92b3cb;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #c5dff3;
 }
 
 .code{

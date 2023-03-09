@@ -5,7 +5,7 @@
             <p>{{question.question}}</p>
             <p class="date-posted">posted {{question.created_at| date}} </p>
         </div>
-        <button routerLink="askquestion">Ask Question</button>
+        <button routerLink="/home/ask-question">Ask Question</button>
     </div>
 
     <div class="details">
@@ -34,10 +34,9 @@
             
             <form>
                 <p>Post Your Answer</p>
-                <textarea name="answer" id="answer" cols="20" rows="5"></textarea>
+                <editor name="answer" id="answer" ></editor>
                 <p>Post Your Code</p>
-                <textarea name="code" id="code" cols="20" rows="5"></textarea>
-                
+                <editor name="code" id="code" ></editor>
                 <button type="submit">Post Your Answer</button>
             </form>
         </div>

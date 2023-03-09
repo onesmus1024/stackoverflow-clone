@@ -12,6 +12,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { questionsReducer } from './state/reducers/questions.reducer';
 import { QuestionEffects } from './state/effects/question.effect';
+import { usersReducer } from './state/reducers/users.reducer';
+import { UserEffects } from './state/effects/user.effect';
+import { tagsReducer } from './state/reducers/tags.reducer';
+import { TagsEffects } from './state/effects/tag.effect';
+import { companiesReducer } from './state/reducers/companies.redicer';
+import { CompaniesEffects } from './state/effects/company.effect';
+
 import { HomePageComponent } from './home/home-page/home-page.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './home/login/login.component';
@@ -24,6 +31,7 @@ import { CompaniesComponent } from './companies/companies.component';
 import { TagsComponent } from './tags/tags.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AskQuestionComponent } from './questions/ask-question/ask-question.component';
+import { ProfileComponent } from './home/profile/profile.component';
 const router: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent, children: [
@@ -36,6 +44,7 @@ const router: Routes = [
     { path: 'companies', component: CompaniesComponent},
     { path: 'tags', component: TagsComponent},
     { path: 'ask-question', component: AskQuestionComponent},
+    { path: 'profile', component: ProfileComponent},
     { path: '**', component: PageNotFoundComponent}
 
 
@@ -50,9 +59,9 @@ const router: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ questions: questionsReducer }),
+    StoreModule.forRoot({ questions: questionsReducer, users: usersReducer, tags: tagsReducer, companies: companiesReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([QuestionEffects]),
+    EffectsModule.forRoot([QuestionEffects, UserEffects, TagsEffects, CompaniesEffects]),
     MatIconModule,
     RouterModule.forRoot(router),
     FontAwesomeModule

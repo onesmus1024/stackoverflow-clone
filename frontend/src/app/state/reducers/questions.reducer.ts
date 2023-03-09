@@ -3,13 +3,7 @@ import * as QuestionsActions from '../actions/questions.actions';
 
 import { Question } from "src/app/interfaces/question.interface";
 import { QuestionVote } from "src/app/interfaces/questionVote.interface";
-const user  ={
-    id: '67',
-    name: 'John Doe',
-    email: '',
-    created_at: '2020-10-10 10:10:10',
-    updated_at: '2020-10-10 10:10:10'
-  }
+
 export interface QuestionsState {
     questions: Question[];
     loading: boolean;

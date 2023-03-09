@@ -4,11 +4,12 @@ import { AppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { Question } from '../interfaces/question.interface';
 import { SingleQuestionComponent } from './single-question/single-question.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-questions',
   standalone: true,
-  imports: [CommonModule, SingleQuestionComponent],
+  imports: [CommonModule, SingleQuestionComponent, RouterModule],
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.css']
 })

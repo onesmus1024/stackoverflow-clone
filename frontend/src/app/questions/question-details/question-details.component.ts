@@ -6,12 +6,13 @@ import { AppState } from 'src/app/app.state';
 import { Question } from 'src/app/interfaces/question.interface';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { EditorComponent } from '@tinymce/tinymce-angular';
 import * as QuestionsActions from "../../state/actions/questions.actions";
 
 @Component({
   selector: 'app-question-details',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MatIconModule, EditorComponent],
   templateUrl: './question-details.component.html',
   styleUrls: ['./question-details.component.css']
 })

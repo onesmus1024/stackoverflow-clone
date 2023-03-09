@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Tag } from 'src/app/interfaces/tag.interface';
 
 @Component({
   selector: 'app-single-tag',
@@ -9,5 +10,15 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./single-tag.component.css']
 })
 export class SingleTagComponent {
+
+  @Input() tag: Tag = {
+    id: '0',
+    tag : '',
+    created_at: '',
+    updated_at: '',
+    description: ''
+  };
+
+  
 
 }
