@@ -12,7 +12,7 @@ export interface UsersState {
 
 export const initialState: UsersState = {
     users: [],
-    loading: false,
+    loading: true,
     error: null
 };
 
@@ -22,7 +22,7 @@ export const usersReducer = createReducer(
     on(UsersActions.loadUsers, (state) => {
         return {
             ...state,
-            loading: true
+            loading: false
         }
     }
     ),

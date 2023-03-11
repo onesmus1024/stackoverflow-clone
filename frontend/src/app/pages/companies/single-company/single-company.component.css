@@ -1,0 +1,121 @@
+.single-company {
+    margin: 0 auto;
+    width: 80%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.single-company h1 {
+    text-align: center;
+}
+
+.single-company .logo {
+    width: 100%;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.single-company .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.single-company .info {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.single-company .info .description {
+    margin-top: 20px;
+
+}
+
+.single-company .info .description p {
+    text-align: justify;
+}
+
+.single-company .info .tag {
+    border: 1px solid #92b3cb;
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    height: 30px;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #c5dff3;
+}
+
+
+/* tablet */
+@media screen and (max-width: 768px) {
+    .single-company {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: auto;
+    }
+
+    .single-company .info{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .single-company .logo {
+        height: 150px;
+    }
+
+    .single-company .info .tag {
+        margin: 5px;
+    }
+
+    .single-company .info .tag p {
+        font-size: 12px;
+    }
+
+}
+
+/* mobile */
+
+@media screen and (max-width: 480px) {
+    .single-company {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: auto;
+    }
+
+    .single-company .info{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .single-company .logo {
+        height: 100px;
+    }
+
+    .single-company .info .tag {
+        margin: 5px;
+    }
+
+    .single-company .info .tag p {
+        font-size: 12px;
+    }
+
+}

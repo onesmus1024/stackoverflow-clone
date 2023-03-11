@@ -1,0 +1,92 @@
+
+
+.ask-question{
+    min-height: 80vh;
+    width: 80%;
+    margin: auto;
+}
+.ask-question .header{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+
+}
+
+.ask-question .form-group{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin: auto;
+}
+
+.ask-question .form-group form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.ask-question .form-group form .input-group{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.ask-question .form-group form .input-group input{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.ask-question .form-group form .input-group editor{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.ask-question .form-group form .input-group label{
+    width: 100%;
+    text-align: left;
+    color: gray;
+}
+
+.ask-question .form-group form .input-group input:focus{
+    outline: none;
+    border: 1px solid black;
+}
+
+/* button */
+
+.ask-question .form-group form button{
+    
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background: #6bbbf7;
+    color: white;
+    cursor: pointer;
+}
+
+.ask-question .form-group form button:hover{
+    background: #0c81db;
+    color: white;
+}
+
+
+#code, #description{
+    width: 100%;
+}

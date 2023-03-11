@@ -1,0 +1,115 @@
+.profile{
+    min-height: 80vh;
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "user user" 
+    "answers questions";
+
+    padding: 20px;
+    gap: 20px;
+
+}
+
+
+.user{
+    grid-area: user;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+
+}
+.user img{
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user .name{
+    font-size: 20px;
+    font-weight: 600;
+}
+.user .email{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.answers,.questions{
+    grid-area: answers;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid #ccc;
+}
+.answers .header,.questions .header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.answers .answer,.questions .question{
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
+}
+.answers .answer .total,.questions .question .total{
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+}
+
+.answers .answer .total p,.questions .question .total p{
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
+.answers .answer .answers-heading,.questions .question .questions-heading{
+    display: flex;
+    flex-direction: column;
+}
+.answers .answer .answers-heading p,.questions .question .questions-heading p{
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+}
+.answers .answer .answers-heading ol li,.questions .question .questions-heading ol li{
+    font-size: 14px;
+    font-weight: 400;
+    color: #666;
+    margin: 5px 0;
+}
+
+.questions{
+    grid-area: questions;
+}
+
+
+@media screen and (max-width: 768px){
+    .profile{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "user" 
+        "answers" 
+        "questions";
+    }
+}
+
+/* phone */
+
+@media screen and (max-width: 480px){
+    .profile{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "user" 
+        "answers" 
+        "questions";
+    }
+}
