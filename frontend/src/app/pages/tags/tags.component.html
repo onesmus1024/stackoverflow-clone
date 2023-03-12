@@ -1,0 +1,26 @@
+
+<div class="tags">
+
+    <div class="header">
+
+        <p>Tags</p>
+
+        <div class="search">
+
+            <form>
+
+                <input type="text" placeholder="Search">
+
+                <button type="submit"><i class="fa fa-search"></i></button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="all-tags">
+            
+            <app-single-tag *ngFor="let tag of tags" [tag]="tag"></app-single-tag>
+    </div>
+
+</div>

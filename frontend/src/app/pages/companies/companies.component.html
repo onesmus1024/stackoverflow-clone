@@ -1,0 +1,20 @@
+<div class="companies">
+    <div class="header">
+        <p>Companies</p>
+
+        <div class="search">
+           <form >
+            <input type="text" placeholder="Search" />
+
+            <button>
+                <i class="fa fa-search"></i>
+            </button>
+
+           </form>
+        </div>
+    </div>
+
+    <div class="all-companies">
+        <app-single-company *ngFor="let company of companies" [company]="company"></app-single-company>
+    </div>
+</div>

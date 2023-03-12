@@ -1,0 +1,9 @@
+
+<div class="questions">
+    <div class="header">
+        <p>Top Questions</p>
+        <button routerLink="/home/ask-question">Ask Question</button>
+    </div>
+
+    <app-single-question *ngFor="let question of questions" [question]="question"></app-single-question>
+</div>
