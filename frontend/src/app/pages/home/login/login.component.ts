@@ -9,7 +9,7 @@ import { ModalComponent } from 'src/app/pages/modal/modal.component';
 import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { selectLoggedInUserStateloading,selectLoggedInUserStateError } from 'src/app/state/selectors/loggedInUser.selector';
+import { selectLoggedInUserStateloading} from 'src/app/state/selectors/loggedInUser.selector';
 import * as loggedInUserActions from 'src/app/state/actions/loggeInUser.actions';
 @Component({
   selector: 'app-login',
@@ -34,9 +34,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+    this.store.select(selectLoggedInUserStateloading).subscribe((loading) => {
+      this.isLoading = loading;
+    }
+    )
   }
 
+
+
+
+  
 
 
 
@@ -51,16 +58,6 @@ export class LoginComponent implements OnInit {
       this.isLoading = loading;
     }
     )
-
-    this.store .select(selectLoggedInUserStateError).subscribe((error) => {
-      this.error = error;
-    }
-    )
-
-
-   this.store.dispatch(loggedInUserActions.loginError ({error: 'error'}));
-
-   
 
     if (this.error) {
       this.modalHost.viewContainerRef.clear();
