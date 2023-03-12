@@ -19,6 +19,10 @@ import { tagsReducer } from './state/reducers/tags.reducer';
 import { TagsEffects } from './state/effects/tag.effect';
 import { companiesReducer } from './state/reducers/companies.redicer';
 import { CompaniesEffects } from './state/effects/company.effect';
+import { _loggedInUserReducer } from './state/reducers/loggedInUser.reducer';
+import { LoggedInUserEffects } from './state/effects/loggedInUser.effect';
+import { RegisterUserEffects } from './state/effects/registerUser.effect';
+import { registerUserReducer } from './state/reducers/registerUser.reducer';
 
 
 import { HomePageComponent } from './pages/home/home-page/home-page.component';
@@ -37,6 +41,9 @@ import { ProfileComponent } from './pages/home/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { PrivacyComponent } from './pages/privacy/privacy.component';
+import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
+import { AllQuestionsComponent } from './pages/admin/all-questions/all-questions.component';
+import { AllUsersComponent } from './pages/admin/all-users/all-users.component';
 
 const router: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -57,7 +64,19 @@ const router: Routes = [
     { path: '**', component: PageNotFoundComponent}
 
 
-  ] },
+  ]
+
+},
+
+{ path: 'admin', component: AdminHomeComponent,
+children : [
+  { path: '', component: AllQuestionsComponent},
+  { path: 'questions', component: AllQuestionsComponent},
+  { path: 'users', component: AllUsersComponent},
+  { path: '**', component: PageNotFoundComponent}
+
+]},
+{ path: '**', component: PageNotFoundComponent}
 ]
 @NgModule({
   declarations: [
@@ -69,9 +88,9 @@ const router: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot({ questions: questionsReducer, users: usersReducer, tags: tagsReducer, companies: companiesReducer }),
+    StoreModule.forRoot({ questions: questionsReducer, users: usersReducer, tags: tagsReducer, companies: companiesReducer , loggedInUser: _loggedInUserReducer, router: routerReducer, registerUser: registerUserReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([QuestionEffects, UserEffects, TagsEffects, CompaniesEffects]),
+    EffectsModule.forRoot([QuestionEffects, UserEffects, TagsEffects, CompaniesEffects, LoggedInUserEffects, RegisterUserEffects]),
     MatIconModule,
     RouterModule.forRoot(router),
     FontAwesomeModule

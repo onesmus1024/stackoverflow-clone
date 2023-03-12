@@ -68,6 +68,11 @@
     font-weight: bold;
     cursor: pointer;
 }
+.form-group form .input-group button:disabled{
+    background-color: #0a95ff;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
 
 p{
     color: gray;
@@ -83,6 +88,29 @@ p a{
 p a:hover{
     text-decoration: underline;
     cursor: pointer;
+}
+
+.button-spinner{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+.loader{
+    position: relative;
+    top: -50px;
+    width: 10px;
+    height: 10px;
+
+}
+
+.error{
+    color: red;
+    font-size: 0.8rem;
+    text-align: left;
+    width: 100%;
 }
 
 

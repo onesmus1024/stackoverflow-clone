@@ -13,9 +13,14 @@ export class ModalComponent {
 
   @ViewChild(ModalDirective , {static: true}) modalHost!: ModalDirective;
 
-  closeModal() {
-    // const modal = this.modalHost.viewContainerRef;
-    // modal.clear();
-  }
 
+  title = 'frontend';
+  body = 'body';
+
+
+  close() {
+
+    return this.modalHost.close();
+
+  }
 }
