@@ -19,17 +19,8 @@ export class RegisterService {
 
       setTimeout(() => {
         this.store.dispatch(registerUserActions.register({ user }));
-        observer.next({id: '1', username: 'test', email: 'test@gmail.com', token: 'test'});
-        this.router.navigate(['/home']);
-      }
-
-      
-
-        , 4000);
-
-
-        
-
+        observer.next({ id: '1', username: 'test', email: 'test@gmail.com', token: 'test' }); 
+      },4000);
     });
   }
 
@@ -37,5 +28,5 @@ export class RegisterService {
 
 
 
-  
+
 }

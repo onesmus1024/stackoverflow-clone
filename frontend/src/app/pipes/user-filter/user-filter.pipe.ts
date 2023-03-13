@@ -6,8 +6,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UserFilterPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
-  }
 
+  // take in a list of users and a search string
+
+  transform(users: any, search: string): any {
+      
+      // if no search string, return all users
+  
+      if (!search) {
+        return users;
+      }
+  
+      // if search string, filter users
+  
+      return users.filter((user: any) => {
+        return user.name.toLowerCase().includes(search.toLowerCase());
+      });
+    }
 }

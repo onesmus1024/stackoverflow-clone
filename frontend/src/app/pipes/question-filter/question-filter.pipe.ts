@@ -6,8 +6,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class QuestionFilterPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  // take in a list of questions and a search string
+
+  transform(questions: any, search: string): any {
+
+    // if no search string, return all questions
+
+    if (!search) {
+      return questions;
+    }
+
+    // if search string, filter questions
+
+    return questions.filter((question: any) => {
+      return question.title.toLowerCase().includes(search.toLowerCase());
+    });
   }
 
 }

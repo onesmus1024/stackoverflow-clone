@@ -9,7 +9,7 @@ import { ModalComponent } from 'src/app/pages/modal/modal.component';
 import { SpinnerComponent } from 'src/app/shared/spinner/spinner.component';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
-import { selectLoggedInUserStateloading} from 'src/app/state/selectors/loggedInUser.selector';
+import { selectLoggedInUserStateloading,selectLoggedInUserStateError} from 'src/app/state/selectors/loggedInUser.selector';
 import * as loggedInUserActions from 'src/app/state/actions/loggeInUser.actions';
 @Component({
   selector: 'app-login',
@@ -52,6 +52,27 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    if (this.loginForm.value.email == 'admin@gmail.com' || this.loginForm.value.password == 'admin') {
+      // throw error in user state
+      this.store.dispatch(loggedInUserActions.loginError({ error: 'Invalid Credentials' }));
+      this.store.select(selectLoggedInUserStateError).subscribe((error) => {
+        this.error = error;
+      }
+      )
+
+      console.log(this.error);
+    }
+
+    if (this.error) {
+      this.modalHost.viewContainerRef.clear();
+      const modal = this.modalHost.viewContainerRef.createComponent(ModalComponent);
+      return ;
+      // modal.instance.title = 'Error';
+      // modal.instance.body = this.error;
+      // modal.instance.close.subscribe(() => {
+      //   this.modalHost.viewContainerRef.clear();
+      // });
+    }
 
     this.store.dispatch(loggedInUserActions.login({ user: this.loginForm.value }));
     this.store.select(selectLoggedInUserStateloading).subscribe((loading) => {
@@ -59,15 +80,9 @@ export class LoginComponent implements OnInit {
     }
     )
 
-    if (this.error) {
-      this.modalHost.viewContainerRef.clear();
-      const modal = this.modalHost.viewContainerRef.createComponent(ModalComponent);
-      // modal.instance.title = 'Error';
-      // modal.instance.body = this.error;
-      // modal.instance.close.subscribe(() => {
-      //   this.modalHost.viewContainerRef.clear();
-      // });
-    }
+   
+
+  
 
 
 

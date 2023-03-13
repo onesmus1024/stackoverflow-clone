@@ -1,4 +1,4 @@
-<div class="back-drop">
+<div class="back-drop" #modal>
 
 
     <div class="modal">
@@ -10,9 +10,9 @@
         </div>
 
         <div class="content">
-            <p>This is the error message</p>
+            <p>Your email can't be admin@gmail.com</p>
         </div>
-        <button >Close</button>
+        <button (click)="close()">Close</button>
     </div>
 
 

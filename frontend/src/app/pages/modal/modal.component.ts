@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModalDirective } from 'src/app/directives/modal.directive';
 
@@ -12,6 +12,7 @@ import { ModalDirective } from 'src/app/directives/modal.directive';
 export class ModalComponent {
 
   @ViewChild(ModalDirective , {static: true}) modalHost!: ModalDirective;
+  @ViewChild('modal') modal!: ModalDirective;
 
 
   title = 'frontend';
@@ -19,8 +20,6 @@ export class ModalComponent {
 
 
   close() {
-
-    return this.modalHost.close();
 
   }
 }
