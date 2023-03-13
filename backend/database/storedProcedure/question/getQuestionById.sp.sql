@@ -1,0 +1,11 @@
+
+USE STACKOVERFLOW;
+GO
+
+CREATE OR ALTER PROCEDURE getQuestionById
+    @id VARCHAR ( 255 )
+AS
+BEGIN
+    SELECT * FROM questions WHERE id = @id
+END
+

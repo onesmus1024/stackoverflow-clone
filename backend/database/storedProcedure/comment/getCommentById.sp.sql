@@ -1,0 +1,10 @@
+
+USE STACKOVERFLOW;
+GO
+
+CREATE OR ALTER PROCEDURE getCommentById
+    @id VARCHAR ( 255 )
+AS
+BEGIN
+    SELECT * FROM comments WHERE id = @id
+END

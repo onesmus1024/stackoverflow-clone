@@ -1,0 +1,11 @@
+
+
+USE STACKOVERFLOW;
+GO
+
+
+CREATE OR ALTER PROCEDURE getAllCompanies
+AS
+BEGIN
+    SELECT * FROM companies
+END

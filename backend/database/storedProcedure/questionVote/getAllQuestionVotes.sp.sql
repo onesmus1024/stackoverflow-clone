@@ -1,0 +1,11 @@
+
+USE STACKOVERFLOW;
+GO
+
+
+
+CREATE OR ALTER PROCEDURE getAllQuestionVotes
+AS
+BEGIN
+    SELECT * FROM question_votes
+END

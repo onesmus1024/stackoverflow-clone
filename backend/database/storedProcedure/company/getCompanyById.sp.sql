@@ -1,0 +1,10 @@
+
+USE STACKOVERFLOW;
+GO
+
+CREATE OR ALTER PROCEDURE getCompanyById
+    @id VARCHAR ( 255 )
+AS
+BEGIN
+    SELECT * FROM companies WHERE id = @id
+END
