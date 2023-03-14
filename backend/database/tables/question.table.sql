@@ -5,7 +5,7 @@ GO
 
 CREATE TABLE questions
 (
-    id VARCHAR ( 255 ) NOT NULL ,
+    id VARCHAR ( 255 ) PRIMARY KEY ,
     question VARCHAR ( 255 ) NOT NULL ,
     description VARCHAR ( 255 ) NOT NULL ,
     code VARCHAR ( 255 ) NOT NULL ,

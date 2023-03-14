@@ -4,7 +4,7 @@ GO
 
 CREATE TABLE comments
 (
-    id VARCHAR ( 255 ) NOT NULL ,
+    id VARCHAR ( 255 ) PRIMARY KEY ,
     comment VARCHAR ( 255 ) NOT NULL ,
     created_at TIMESTAMP NOT NULL ,
     updated_at TIMESTAMP NOT NULL ,

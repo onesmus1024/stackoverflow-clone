@@ -5,7 +5,7 @@ GO
 
 CREATE TABLE answer_votes
 (
-    id VARCHAR ( 255 ) NOT NULL ,
+    id VARCHAR ( 255 ) PRIMARY KEY ,
     vote INT NOT NULL ,
     created_at TIMESTAMP NOT NULL ,
     updated_at TIMESTAMP NOT NULL ,

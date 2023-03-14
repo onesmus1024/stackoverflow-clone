@@ -4,7 +4,7 @@ GO
 
 CREATE TABLE answers
 (
-    id VARCHAR ( 255 ) NOT NULL ,
+    id VARCHAR ( 255 ) PRIMARY KEY ,
     answer VARCHAR ( 255 ) NOT NULL ,
     created_at TIMESTAMP NOT NULL ,
     updated_at TIMESTAMP NOT NULL ,
