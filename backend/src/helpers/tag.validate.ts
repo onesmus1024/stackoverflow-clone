@@ -13,3 +13,5 @@ const tagSchema = Joi.object({
 const validateTag = (tag:TagModel) => {
     return tagSchema.validate(tag)
 }
+
+export default validateTag

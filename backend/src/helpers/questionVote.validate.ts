@@ -13,3 +13,5 @@ const questionVoteSchema = Joi.object({
 const validateQuestionVote = (questionVote:QuestionVoteModel) => {
     return questionVoteSchema.validate(questionVote)
 }
+
+export default validateQuestionVote

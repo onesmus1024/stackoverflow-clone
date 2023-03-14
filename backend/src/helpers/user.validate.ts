@@ -16,3 +16,5 @@ const userSchema = Joi.object({
 const validateUser = (user:UserModel) => {
     return userSchema.validate(user)
 }
+
+export default validateUser
