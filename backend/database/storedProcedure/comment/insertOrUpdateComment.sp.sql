@@ -5,8 +5,8 @@ GO
 CREATE OR ALTER PROCEDURE insertOrUpdateComment
     @id VARCHAR ( 255 ),
     @comment VARCHAR ( 255 ),
-    @created_at TIMESTAMP,
-    @updated_at TIMESTAMP,
+    @created_at DATETIME,
+    @updated_at DATETIME,
     @user_id VARCHAR ( 255 ),
     @answer_id VARCHAR ( 255 )
 AS

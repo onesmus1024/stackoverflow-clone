@@ -5,8 +5,8 @@ GO
 CREATE OR ALTER PROCEDURE insertOrUpdateQuestionVote
     @id VARCHAR ( 255 ),
     @vote INT,
-    @created_at TIMESTAMP,
-    @updated_at TIMESTAMP,
+    @created_at DATETIME,
+    @updated_at DATETIME,
     @user_id VARCHAR ( 255 ),
     @question_id VARCHAR ( 255 )
 AS

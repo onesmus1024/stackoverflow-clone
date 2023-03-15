@@ -76,7 +76,7 @@ export const createQuestion: RequestHandler = async (req: Request, res: Response
 
 // get all questions
 
-export const getAllQuestios : RequestHandler = async (req: Request, res: Response) => {
+export const getAllQuestions : RequestHandler = async (req: Request, res: Response) => {
     
        try {
 

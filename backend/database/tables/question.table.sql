@@ -9,10 +9,12 @@ CREATE TABLE questions
     question VARCHAR ( 255 ) NOT NULL ,
     description VARCHAR ( 255 ) NOT NULL ,
     code VARCHAR ( 255 ) NOT NULL ,
-    created_at TIMESTAMP NOT NULL ,
-    updated_at TIMESTAMP NOT NULL ,
+    created_at DATETIME NOT NULL DEFAULT GETDATE(),
+    updated_at DATETIME NOT NULL DEFAULT GETDATE(),
     user_id VARCHAR ( 255 ) NOT NULL ,
     views INT NOT NULL ,
     is_deleted BIT DEFAULT  0 ,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT FK_questions_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+
 );

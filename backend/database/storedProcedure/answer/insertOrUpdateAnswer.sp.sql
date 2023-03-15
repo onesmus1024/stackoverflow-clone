@@ -4,8 +4,8 @@ GO
 CREATE OR ALTER PROCEDURE insertOrUpdateAnswer
     @id VARCHAR ( 255 ) ,
     @answer VARCHAR ( 255 ) ,
-    @created_at TIMESTAMP ,
-    @updated_at TIMESTAMP ,
+    @created_at DATETIME ,
+    @updated_at DATETIME ,
     @user_id VARCHAR ( 255 ) ,
     @question_id VARCHAR ( 255 ) ,
     @code VARCHAR ( 255 ) ,

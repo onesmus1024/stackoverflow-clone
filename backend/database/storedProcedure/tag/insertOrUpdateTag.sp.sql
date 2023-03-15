@@ -6,8 +6,8 @@ CREATE OR ALTER PROCEDURE insertOrUpdateTag
     @id VARCHAR ( 255 ),
     @tag VARCHAR ( 255 ),
     @description VARCHAR ( 255 ),
-    @created_at TIMESTAMP,
-    @updated_at TIMESTAMP,
+    @created_at DATETIME,
+    @updated_at DATETIME,
     @is_deleted BIT
 AS
 BEGIN

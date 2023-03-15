@@ -7,8 +7,8 @@ GO
 CREATE OR ALTER PROCEDURE insertOrUpdateAnswerVote
     @id VARCHAR ( 255 ),
     @vote INT,
-    @created_at TIMESTAMP,
-    @updated_at TIMESTAMP,
+    @created_at DATETIME,
+    @updated_at DATETIME,
     @user_id VARCHAR ( 255 ),
     @answer_id VARCHAR ( 255 )
 AS

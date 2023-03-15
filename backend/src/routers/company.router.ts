@@ -12,5 +12,4 @@ companyRouter.put("/:id", updateCompany);
 
 
 
-
 export default companyRouter;

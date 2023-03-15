@@ -4,13 +4,13 @@ USE STACKOVERFLOW;
 GO
 
 
-CREATE OR ALTER PROCEDURE insertOrUpdateUsers
+CREATE OR ALTER PROCEDURE insertOrUpdateUser
 @id VARCHAR ( 255 ),
 @name VARCHAR ( 255 ),
 @email VARCHAR ( 255 ),
 @password VARCHAR ( 255 ),
-@created_at TIMESTAMP,
-@updated_at TIMESTAMP,
+@created_at DATETIME,
+@updated_at DATETIME,
 @is_sent BIT,
 @is_admin BIT,
 @is_deleted BIT

@@ -2,16 +2,14 @@
 USE STACKOVERFLOW;
 GO
 
-
-
 CREATE OR ALTER PROCEDURE insertOrUpdateCompany
     @id VARCHAR ( 255 ) ,
     @name VARCHAR ( 255 ) ,
     @logo_url VARCHAR ( 255 ) ,
     @tag_id VARCHAR ( 255 ) ,
     @description VARCHAR ( 255 ) ,
-    @created_at TIMESTAMP ,
-    @updated_at TIMESTAMP ,
+    @created_at DATETIME ,
+    @updated_at DATETIME ,
     @is_deleted BIT
 AS
 BEGIN
