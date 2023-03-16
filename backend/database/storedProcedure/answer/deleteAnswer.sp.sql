@@ -7,5 +7,6 @@ CREATE OR ALTER PROCEDURE deleteAnswer
 AS
 BEGIN
     UPDATE answers SET is_deleted = 1 WHERE id = @id
+    SELECT * FROM answers WHERE id = @id
 END
 

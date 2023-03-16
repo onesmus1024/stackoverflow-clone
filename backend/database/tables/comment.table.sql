@@ -13,5 +13,7 @@ CREATE TABLE comments
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (answer_id) REFERENCES answers(id),
     CONSTRAINT FK_comments_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT FK_comments_answer_id_answers_id FOREIGN KEY (answer_id) REFERENCES answers(id) ON DELETE CASCADE
+
 );
+
+

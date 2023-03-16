@@ -17,3 +17,5 @@ CREATE TABLE companies
     CONSTRAINT FK_companies_tag_id_tags_id FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
 );
 
+
+

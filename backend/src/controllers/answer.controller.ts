@@ -15,8 +15,16 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
 
     try {
 
-        const { answer, user_id, question_id, code } = req.body;
-
+        const { answer, user_id, question_id, code,is_accepted } = req.body;
+        // id: string;
+        // answer: string;
+        // created_at: string;
+        // updated_at: string;
+        // user_id: string;
+        // question_id: string;
+        // code: string;
+        // is_deleted: string;
+        // is_accepted: string;
         const answerModel = new AnswerModel(
             uuidv4(),
             answer,
@@ -25,7 +33,8 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
             user_id,
             question_id,
             code,
-            "0"
+            "0",
+            is_accepted
         );
 
 
@@ -39,6 +48,7 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
             return res.status(500).json({ message: "Internal server error" });
         }
 
+        console.log(answerModel);
         // create answer
 
         const answerCreated = await db.exec("insertOrUpdateAnswer", {
@@ -49,7 +59,8 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
             user_id: answerModel.user_id,
             question_id: answerModel.question_id,
             code: answerModel.code,
-            is_deleted: answerModel.is_deleted
+            is_deleted: answerModel.is_deleted,
+            is_accepted: answerModel.is_accepted
         });
 
 
@@ -87,6 +98,7 @@ export const getAllAnswers: RequestHandler = async (req: Request, res: Response)
         }
     }
     catch (err) {
+        console.log(err);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -127,30 +139,31 @@ export const updateAnswer: RequestHandler = async (req: Request, res: Response) 
     try {
 
         const { id } = req.params;
-        const { answer, code } = req.body;
+        const { answer, code,is_accepted } = req.body;
 
         // check for connection to db
         if (!db.checkConnection()) {
             return res.status(500).json({ message: "Internal server error" });
         }
 
-        const answerToUpdate = await db.exec("getAnswerById", {
+        const answerToUpdate:AnswerModel[] = await db.exec("getAnswerById", {
             id: id
-        }) as unknown as AnswerModel;
+        }) as unknown as AnswerModel[];
 
         if (!answerToUpdate) {
             return res.status(404).json({ message: "Answer not found" });
         }
 
         const answerModel = new AnswerModel(
-            answerToUpdate.id,
+            answerToUpdate[0].id,
             answer,
-            answerToUpdate.created_at,
+            new Date(answerToUpdate[0].created_at).toISOString(),
             new Date().toISOString(),
-            answerToUpdate.user_id,
-            answerToUpdate.question_id,
+            answerToUpdate[0].user_id,
+            answerToUpdate[0].question_id,
             code,
-            answerToUpdate.is_deleted
+            answerToUpdate[0].is_deleted.toString(),
+            is_accepted.toString()
         );
 
         const { error } = validateAnswer(answerModel);
@@ -168,7 +181,8 @@ export const updateAnswer: RequestHandler = async (req: Request, res: Response) 
             user_id: answerModel.user_id,
             question_id: answerModel.question_id,
             code: answerModel.code,
-            is_deleted: answerModel.is_deleted
+            is_deleted: answerModel.is_deleted,
+            is_accepted: answerModel.is_accepted
         });
 
         if (answerUpdated) {

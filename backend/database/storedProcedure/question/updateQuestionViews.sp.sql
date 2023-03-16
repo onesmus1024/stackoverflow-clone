@@ -4,7 +4,7 @@ USE  STACKOVERFLOW;
 GO
 
 
-CREATE PROCEDURE updateQuestionViews
+CREATE OR ALTER PROCEDURE updateQuestionViews
     @id VARCHAR ( 255 )
 AS
 BEGIN

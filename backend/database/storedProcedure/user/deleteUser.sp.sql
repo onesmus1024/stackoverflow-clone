@@ -9,4 +9,5 @@ CREATE OR ALTER PROCEDURE deleteUser
 AS
 BEGIN
     UPDATE users SET is_deleted = 1 WHERE id = @id
+    SELECT * FROM users WHERE id = @id
 END

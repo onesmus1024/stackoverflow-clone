@@ -24,7 +24,7 @@ export const createQuestion: RequestHandler = async (req: Request, res: Response
 
    try {
 
-     const { question, description, code, user_id } = req.body;
+     const { question, description, code, user_id,views } = req.body;
     const questionModel = new QuestionModel(
         uuidv4(),
         question,
@@ -33,10 +33,12 @@ export const createQuestion: RequestHandler = async (req: Request, res: Response
         new Date().toISOString(),
         new Date().toISOString(),
         user_id,
-        0,
+        views,
         "0"
     );
-        
+
+    console.log(questionModel);
+    
     const { error } = validateQuestion(questionModel);
     if (error) {
         return res.status(400).json({ message: error.details[0].message });
@@ -96,6 +98,7 @@ export const getAllQuestions : RequestHandler = async (req: Request, res: Respon
        }
     
          catch (error : any) {
+            console.log(error);
             return res.status(500).json({ message: error.message });
         }
 }
@@ -142,25 +145,27 @@ export const updateQuestion : RequestHandler = async (req: Request, res: Respons
         const { id } = req.params;
 
     // get question by id
-    const question:QuestionModel = await db.exec("getQuestionById", { id }) as unknown as QuestionModel;
+    const questionToUpdate:QuestionModel[] = await db.exec("getQuestionById", { id }) as unknown as QuestionModel[];
 
-    if (!question) {
+    if (questionToUpdate.length === 0) {
         return res.status(404).json({ message: "Question not found" });
     }
-
-    const { question: questionBody, description, code, user_id } = req.body;
+    console.log("quiz",questionToUpdate)
+    const { question, description, code, user_id,views } = req.body;
 
     const questionModel = new QuestionModel(
         id,
-        questionBody,
+        question,
         description,
         code,
-        question.created_at,
+        new Date(questionToUpdate[0].created_at).toISOString(),
         new Date().toISOString(),
         user_id,
-        question.views,
-        question.is_deleted
+        views,
+        questionToUpdate[0].is_deleted.toString() === "true" ? "1" : "0"
     );
+
+    console.log(questionModel)
 
     const { error } = validateQuestion(questionModel);
     if (error) {
@@ -185,6 +190,9 @@ export const updateQuestion : RequestHandler = async (req: Request, res: Respons
         views: questionModel.views.toString(),
         is_deleted: questionModel.is_deleted
     });
+
+
+    console.log(questionUpdated);
 
     if (questionUpdated) {
         // return question created

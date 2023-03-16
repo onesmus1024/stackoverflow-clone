@@ -5,7 +5,7 @@
 GET http://localhost:4000/api/users
 
 ### get user by id
-GET http://localhost:4000/api/users/1
+GET http://localhost:4000/api/users/20148ddd-1362-466b-9a8e-607497c76b48
 
 ### create user
 POST http://localhost:4000/api/users/register
@@ -14,9 +14,348 @@ Content-Type: application/json
 {
   "name": "John Doe",
   "email": "john@gmail.com",
-  "password": "1234567"
+  "password": "123456"
 }
 
+
+### update user
+PUT http://localhost:4000/api/users/20148ddd-1362-466b-9a8e-607497c76b48
+Content-Type: application/json
+
+{
+      "name": "John Doe",
+      "email": "john@gmail.com",
+      "password": "123456"
+
+    }
+
+### delete user
+
+DELETE http://localhost:4000/api/users/20148ddd-1362-466b-9a8e-607497c76b48
+
+
+### login user
+
+POST http://localhost:4000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "john@gmail.com",
+  "password": "123456"
+
+}
+
+
+
+# tags
+
+### get all tags
+GET http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
+
+
+
+// tag: string;
+// description: string;
+### create tag
+POST http://localhost:4000/api/tags
+Content-Type: application/json
+
+{
+  "tag": "js",  
+  "description": "It is a programming language for the web"
+}
+
+
+### update tag
+PUT http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
+Content-Type: application/json
+
+{
+  "tag": "js",  
+  "description": "It is a programming language for the web"
+}
+
+
+### delete tag
+
+DELETE http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
+
+
+
+# Questions
+
+### get all questions
+
+GET http://localhost:4000/api/questions
+
+
+### get question by id
+
+GET http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
+
+
+### create question
+
+POST http://localhost:4000/api/questions
+Content-Type: application/json
+
+{
+  "question": "What is the difference between a class and an object?",
+  "description": "I am new to programming and I am trying to understand the difference between a class and an object. I have read the definition of a class and an object but I am still confused. Can someone please explain the difference between a class and an object in simple terms?",
+  "code": "class Person { constructor(name, age) { this.name = name; this.age = age; } } const person1 = new Person('John', 30);",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "views": 0
+}
+
+
+### update question
+
+PUT http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
+Content-Type: application/json
+
+{
+
+  "question": "What is the?",
+  "description": "test I am new to programming and I am trying to understand the difference between a class and an object. I have read the definition of a class and an object but I am still confused. Can someone please explain the difference between a class and an object in simple terms?",
+  "code": "class Person { constructor(name, age) { this.name = name; this.age = age; } } const person1 = new Person('John', 30);",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "views": 1
+
+}
+
+
+### delete question
+
+DELETE http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
+
+
+
+
+#question votes
+
+### get all question votes
+
+GET http://localhost:4000/api/questionVotes
+
+
+### get question vote by id
+
+GET http://localhost:4000/api/questionVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
+
+
+### create question vote
+
+POST http://localhost:4000/api/questionVotes
+Content-Type: application/json
+
+{
+
+  "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "vote": 1
+
+}
+
+### update question vote
+
+PUT http://localhost:4000/api/questionVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
+Content-Type: application/json
+
+{
+
+  "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "vote": -1
+
+}
+
+
+
+# Answers
+
+### get all answers
+
+GET http://localhost:4000/api/answers
+
+
+
+### get answer by id
+
+GET http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
+
+
+
+
+### create answer
+
+POST http://localhost:4000/api/answers
+Content-Type: application/json
+
+{
+  "answer": "A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
+  "code": "class Person { constructor(name, age) { this.name = name; this.age = age; } } const person1 = new Person('John', 30);",
+  "is_accepted": "1"
+
+}
+
+
+
+### update answer
+
+PUT http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
+Content-Type: application/json
+
+{
+
+  "answer": "A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
+  "code": "class Person { constructor(name, age) { this.name = name; this.age = age; } } const person1 = new Person('John', 30);",
+  "is_accepted": "1"
+
+}
+
+
+### delete answer
+
+DELETE http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
+
+
+
+
+
+
+# answer votes
+
+### get all answer votes
+
+GET http://localhost:4000/api/answerVotes
+
+
+### get answer vote by id
+
+GET http://localhost:4000/api/answerVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
+
+
+
+### create answer vote
+
+POST http://localhost:4000/api/answerVotes
+Content-Type: application/json
+
+{
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "answer_id":"04396c5d-1182-4e4a-91e2-2132f00ed4a2",
+  "vote": 1
+
+}
+
+
+### update answer vote
+
+PUT http://localhost:4000/api/answerVotes/3f9c645a-9cb9-4342-a3d5-bc9b9c39604a
+Content-Type: application/json
+
+{
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "answer_id":"04396c5d-1182-4e4a-91e2-2132f00ed4a2",
+  "vote": -1
+
+}
+
+# Comments
+
+### get all comments
+
+
+GET http://localhost:4000/api/comments
+
+
+### get comment by id
+
+GET http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
+
+
+
+### create comment
+
+POST http://localhost:4000/api/comments
+Content-Type: application/json
+
+{
+  "comment": "This is a comment",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "answer_id":"04396c5d-1182-4e4a-91e2-2132f00ed4a2",
+  "is_deleted": "0"
+
+}
+
+
+### update comment
+
+PUT http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
+Content-Type: application/json
+
+{
+  "comment": "This is a comment",
+  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "answer_id":"04396c5d-1182-4e4a-91e2-2132f00ed4a2",
+  "is_deleted": "0"
+
+}
+
+
+### delete comment
+
+DELETE http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
+
+
+
+
+
+# company
+
+### get all companies
+
+GET http://localhost:4000/api/companies
+
+
+### get company by id
+
+GET http://localhost:4000/api/companies/1aced642-4712-4e26-9920-cd08f5c8cd05
+
+
+
+### create company
+
+POST http://localhost:4000/api/companies
+Content-Type: application/json
+
+{
+  "name": "Google",
+  "logo_url": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+  "tag_id":"53dc6a4e-2aa9-414a-b95e-a0e7d6156998",
+  "description": "Google is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.",
+  "is_deleted": "0"
+
+}
+
+
+### update company
+
+PUT http://localhost:4000/api/companies/1aced642-4712-4e26-9920-cd08f5c8cd05
+Content-Type: application/json
+
+{
+  "name": "Google",
+  "logo_url": "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
+  "tag_id":"53dc6a4e-2aa9-414a-b95e-a0e7d6156998",
+  "description": "Google is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.",
+  "is_deleted": "1"
+
+}
 
 
 

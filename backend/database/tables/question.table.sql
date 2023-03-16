@@ -18,3 +18,4 @@ CREATE TABLE questions
     CONSTRAINT FK_questions_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 
 );
+

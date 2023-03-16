@@ -23,7 +23,7 @@ export const createCompany: RequestHandler = async (req: Request, res: Response)
     
    try {
 
-     const { name, logo_url, tag_id, description } = req.body;
+    const { name, logo_url, tag_id, description,is_deleted } = req.body;
     const companyModel = new Company(
         uuidv4(),
         name,
@@ -32,7 +32,7 @@ export const createCompany: RequestHandler = async (req: Request, res: Response)
         description,
         new Date().toISOString(),
         new Date().toISOString(),
-        "0"
+        is_deleted
     );
         
     const { error } = validateCompany(companyModel);
@@ -47,7 +47,7 @@ export const createCompany: RequestHandler = async (req: Request, res: Response)
 
     // create company
 
-    const companyCreated = await db.exec("insertOrUpdateCompany", {
+    const companyCreated:Company = await db.exec("insertOrUpdateCompany", {
         id: companyModel.id,
         name: companyModel.name,
         logo_url: companyModel.logo_url,
@@ -56,16 +56,20 @@ export const createCompany: RequestHandler = async (req: Request, res: Response)
         created_at: companyModel.created_at,
         updated_at: companyModel.updated_at,
         is_deleted: companyModel.is_deleted
-    });
+    }) as unknown as Company;
+
+
 
     if (companyCreated) {
         return res.status(201).json(companyCreated);
     } else {
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "company not created" });
     }
 
-   } catch (error) {
-       return res.status(500).json({ message: "Internal server error" });
+   } catch (error: any) {
+    console.log(error);
+    
+       return res.status(500).json({ message: error.message });
    }
 
 }
@@ -117,12 +121,12 @@ export const updateCompany: RequestHandler = async (req: Request, res: Response)
    
     try {
 
-        const { name, logo_url, tag_id, description } = req.body;
+        const { name, logo_url, tag_id, description,is_deleted } = req.body;
         const id = req.params.id;
     
         // get company by id
     
-        const company = await db.exec("getCompanyById", { id: id }) as unknown as Company;
+        const company:Company[] = await db.exec("getCompanyById", { id: id }) as unknown as Company[];
     
         if (!company) {
             return res.status(404).json({ message: "Company not found" });
@@ -134,9 +138,9 @@ export const updateCompany: RequestHandler = async (req: Request, res: Response)
             logo_url,
             tag_id,
             description,
-            company.created_at,
+            new Date(company[0].created_at).toISOString(),
             new Date().toISOString(),
-            "0"
+            is_deleted
         );
     
     

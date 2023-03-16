@@ -14,6 +14,5 @@ CREATE TABLE question_votes
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (question_id) REFERENCES questions(id),
     CONSTRAINT FK_question_votes_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT FK_question_votes_question_id_questions_id FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
 
 );

@@ -7,4 +7,5 @@ CREATE OR ALTER PROCEDURE deleteTag
 AS
 BEGIN
     UPDATE tags SET is_deleted = 1 WHERE id = @id
+    SELECT * FROM tags WHERE id = @id
 END

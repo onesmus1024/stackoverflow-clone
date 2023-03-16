@@ -13,17 +13,23 @@ CREATE OR ALTER PROCEDURE insertOrUpdateCompany
     @is_deleted BIT
 AS
 BEGIN
-    IF @id IS NULL
-        BEGIN
-            INSERT INTO companies (name, logo_url, tag_id, description, created_at, updated_at, is_deleted)
-            VALUES (@name, @logo_url, @tag_id, @description, @created_at, @updated_at, @is_deleted)
-            SELECT * FROM companies WHERE id = @id
-        END
+    IF EXISTS (SELECT * FROM companies WHERE id = @id)
+    BEGIN
+        UPDATE companies
+        SET name = @name,
+            logo_url = @logo_url,
+            tag_id = @tag_id,
+            description = @description,
+            created_at = @created_at,
+            updated_at = @updated_at,
+            is_deleted = @is_deleted
+        WHERE id = @id;
+        SELECT * FROM companies WHERE id = @id;
+    END
     ELSE
-        BEGIN
-            UPDATE companies
-            SET name = @name, logo_url = @logo_url, tag_id = @tag_id, description = @description, created_at = @created_at, updated_at = @updated_at, is_deleted = @is_deleted
-            WHERE id = @id
-            SELECT * FROM companies WHERE id = @id
-        END
+    BEGIN
+        INSERT INTO companies (id, name, logo_url, tag_id, description, created_at, updated_at, is_deleted)
+        VALUES (@id, @name, @logo_url, @tag_id, @description, @created_at, @updated_at, @is_deleted);
+        SELECT * FROM companies WHERE id = @id;
+    END
 END

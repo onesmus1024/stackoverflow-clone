@@ -6,4 +6,5 @@ CREATE OR ALTER PROCEDURE deleteComment
 AS
 BEGIN
     UPDATE comments SET is_deleted = 1 WHERE id = @id
+    SELECT * FROM comments WHERE id = @id
 END

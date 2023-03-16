@@ -16,15 +16,15 @@ export const createQuestionVote: RequestHandler = async (req: Request, res: Resp
         if (!db.checkConnection()) {
             return res.status(500).json({ message: "Internal server error" });
         }
-
+       
         const { question_id, user_id, vote } = req.body;
         const questionVoteModel = new QuestionVoteModel(
             uuidv4(),
-            question_id,
-            user_id,
             vote,
             new Date().toISOString(),
-            new Date().toISOString()
+            new Date().toISOString(),
+            user_id,
+            question_id
         );
 
         const { error } = validateQuestionVote(questionVoteModel);
@@ -36,7 +36,7 @@ export const createQuestionVote: RequestHandler = async (req: Request, res: Resp
             id: questionVoteModel.id,
             question_id: questionVoteModel.question_id,
             user_id: questionVoteModel.user_id,
-            vote: questionVoteModel.vote?'1':'0',
+            vote: questionVoteModel.vote.toString(),
             created_at: questionVoteModel.created_at,
             updated_at: questionVoteModel.updated_at
         });
@@ -101,16 +101,22 @@ export const updateQuestionVote: RequestHandler = async (req: Request, res: Resp
         if (!db.checkConnection()) {
             return res.status(500).json({ message: "Internal server error" });
         }
-        const questionVote:QuestionVoteModel = await db.exec("getQuestionVoteById", { id: req.params.id }) as unknown as QuestionVoteModel;
+        const questionVote:QuestionVoteModel[] = await db.exec("getQuestionVoteById", { id: req.params.id }) as unknown as QuestionVoteModel[];
         if (questionVote) {
+             // id: string;
+        // vote: number;
+        // created_at: string;
+        // updated_at: string;
+        // user_id: string;
+        // question_id: string;
             const { question_id, user_id, vote } = req.body;
             const questionVoteModel = new QuestionVoteModel(
-                questionVote.id,
+                questionVote[0].id,
+                vote,
+                new Date(questionVote[0].created_at).toISOString(),
+                new Date().toISOString(),
                 question_id,
                 user_id,
-                vote,
-                questionVote.created_at,
-                new Date().toISOString()
             );
             const { error } = validateQuestionVote(questionVoteModel);
             if (error) {
@@ -120,7 +126,7 @@ export const updateQuestionVote: RequestHandler = async (req: Request, res: Resp
                 id: questionVoteModel.id,
                 question_id: questionVoteModel.question_id,
                 user_id: questionVoteModel.user_id,
-                vote: questionVoteModel.vote?'1':'0',
+                vote: questionVoteModel.vote.toString(),
                 created_at: questionVoteModel.created_at,
                 updated_at: questionVoteModel.updated_at
             });

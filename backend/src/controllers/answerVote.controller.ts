@@ -9,17 +9,23 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 
 // create answer vote
+// id: string;
+// created_at: string;
+// updated_at: string;
+// user_id: string;
+// answer_id: string;
+// is_deleted: string;
+// vote: number;
 export const createAnswerVote: RequestHandler = async (req: Request, res: Response) => {
     try {
         const { user_id, answer_id, vote } = req.body;
         const answerVoteModel = new AnswerVoteModel(
             uuidv4(),
+            new Date().toISOString(),
+            new Date().toISOString(),
             user_id,
             answer_id,
-            vote?'1':'-1',
-            new Date().toISOString(),
-            new Date().toISOString(),
-            "0"
+            vote,
         );
 
         const { error } = validateAnswerVote(answerVoteModel);
@@ -29,7 +35,7 @@ export const createAnswerVote: RequestHandler = async (req: Request, res: Respon
 
         // check for connection to db
         if (!db.checkConnection()) {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(500).json({ message: "Internal server error DB" });
         }
 
         // create answer vote
@@ -38,11 +44,12 @@ export const createAnswerVote: RequestHandler = async (req: Request, res: Respon
             id: answerVoteModel.id,
             user_id: answerVoteModel.user_id,
             answer_id: answerVoteModel.answer_id,
-            vote: answerVoteModel.vote,
+            vote: answerVoteModel.vote.toString(),
             created_at: answerVoteModel.created_at,
             updated_at: answerVoteModel.updated_at,
-            is_deleted: answerVoteModel.is_deleted
         });
+
+        
 
         if (answerVoteCreated) {
             return res.status(200).json(answerVoteCreated);
@@ -52,6 +59,7 @@ export const createAnswerVote: RequestHandler = async (req: Request, res: Respon
         }
     }
     catch (err) {
+        console.log(err);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -78,6 +86,7 @@ export const getAllAnswerVotes: RequestHandler = async (req: Request, res: Respo
         }
     }
     catch (err) {
+        console.log(err);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -119,17 +128,16 @@ export const updateAnswerVote: RequestHandler = async (req: Request, res: Respon
         const { user_id, answer_id, vote } = req.body;
         // get answer vote by id
 
-        const answerVoteToBeUpdated = await db.exec("getAnswerVoteById", { id: id }) as unknown as AnswerVoteModel;
+        const answerVoteToBeUpdated:AnswerVoteModel[] = await db.exec("getAnswerVoteById", { id: id }) as unknown as AnswerVoteModel[];
 
-        if (answerVoteToBeUpdated) {
+        if (answerVoteToBeUpdated.length > 0) {
             const answerVoteModel = new AnswerVoteModel(
                 id,
+                new Date(answerVoteToBeUpdated[0].created_at).toISOString(),
+                new Date().toISOString(),
                 user_id,
                 answer_id,
-                answerVoteToBeUpdated.vote==='1'?'1':'-1',
-                answerVoteToBeUpdated.created_at,
-                new Date().toISOString(),
-                answerVoteToBeUpdated.is_deleted
+                vote
             );
 
             const { error } = validateAnswerVote(answerVoteModel);
@@ -148,10 +156,9 @@ export const updateAnswerVote: RequestHandler = async (req: Request, res: Respon
                 id: answerVoteModel.id,
                 user_id: answerVoteModel.user_id,
                 answer_id: answerVoteModel.answer_id,
-                vote: answerVoteModel.vote,
+                vote: answerVoteModel.vote.toString(),
                 created_at: answerVoteModel.created_at,
-                updated_at: answerVoteModel.updated_at,
-                is_deleted: answerVoteModel.is_deleted
+                updated_at: answerVoteModel.updated_at
             });
 
             if (answerVoteUpdated) {
@@ -164,6 +171,8 @@ export const updateAnswerVote: RequestHandler = async (req: Request, res: Respon
 
     }
     catch (err: any) {
+        console.log(err);
+        
         return res.status(500).json({ message: "Internal server error" });
     }
 }

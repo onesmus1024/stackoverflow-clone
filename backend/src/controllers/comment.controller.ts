@@ -18,7 +18,14 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 export const createComment: RequestHandler = async (req: Request, res: Response) => {
     try{
 
-        const { comment, user_id, answer_id } = req.body;
+        const { comment, user_id, answer_id,is_deleted } = req.body;
+        // id: string;
+        // comment: string;
+        // created_at: string;
+        // updated_at: string;
+        // user_id: string;
+        // answer_id: string;
+        // is_deleted: string;
         const commentModel = new CommentModel(
             uuidv4(),
             comment,
@@ -26,8 +33,11 @@ export const createComment: RequestHandler = async (req: Request, res: Response)
             new Date().toISOString(),
             user_id,
             answer_id,
-            "0"
+            is_deleted
         );
+
+        console.log(commentModel);
+        
 
         const { error } = validateComment(commentModel);
         if (error) {
@@ -47,8 +57,8 @@ export const createComment: RequestHandler = async (req: Request, res: Response)
             created_at: commentModel.created_at,
             updated_at: commentModel.updated_at,
             user_id: commentModel.user_id,
-            question_id: commentModel.answer_id,
-            is_deleted: commentModel.is_deleted
+            is_deleted: commentModel.is_deleted,
+            answer_id: commentModel.answer_id
         });
 
         if (commentCreated) {
@@ -63,6 +73,7 @@ export const createComment: RequestHandler = async (req: Request, res: Response)
 
     }
     catch(error: any){
+
         return res.status(500).json({ message:error.message });
     }
 }
@@ -79,7 +90,7 @@ export const getCommentsById: RequestHandler = async (req: Request, res: Respons
         }
 
         // get comments by id
-        const comments = await db.exec("getCommentsById", { id: id });
+        const comments = await db.exec("getCommentById", { id: id });
 
         if (comments) {
             return res.status(200).json(comments);
@@ -120,9 +131,9 @@ export const updateComment: RequestHandler = async (req: Request, res: Response)
     try{
 
         const {id } = req.params;
-        const { comment, user_id, answer_id } = req.body;
+        const { comment, user_id, answer_id,is_deleted } = req.body;
         // get comment by id
-        const commentToBeUpdated:CommentModel = await db.exec("getCommentById", { id: id }) as unknown as CommentModel;
+        const commentToBeUpdated:CommentModel[] = await db.exec("getCommentById", { id: id }) as unknown as CommentModel[];
 
         if (!commentToBeUpdated) {
             return res.status(404).json({ message: "Comment not found" });
@@ -131,11 +142,11 @@ export const updateComment: RequestHandler = async (req: Request, res: Response)
         const commentModel = new CommentModel(
             id,
             comment,
-            commentToBeUpdated.created_at,
+            new Date(commentToBeUpdated[0].created_at).toISOString(),
             new Date().toISOString(),
             user_id,
             answer_id,
-            "0"
+            is_deleted
         );
 
         const { error } = validateComment(commentModel);
@@ -188,7 +199,7 @@ export const deleteComment: RequestHandler = async (req: Request, res: Response)
 
         // delete comment by id
 
-        const deletedComment:CommentModel = db.exec("deleteComment", { id: id }) as unknown as CommentModel;
+        const deletedComment:CommentModel = await db.exec("deleteComment", { id: id }) as unknown as CommentModel;
 
         if (deletedComment) {
             return res.status(200).json(deletedComment);

@@ -16,16 +16,17 @@ export const register = async (req: Request, res: Response) => {
         const { name, email, password } = req.body;
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
+       
         const user = new UserModel(
             uuidv4(),
             name,
             email,
             hashedPassword,
-            "0",
-            "0",
-            "0",
             new Date().toISOString(),
-            new Date().toISOString()
+            new Date().toISOString(),
+            "0",
+            "0",
+            "0",
 
         );
 
@@ -36,18 +37,19 @@ export const register = async (req: Request, res: Response) => {
 
         // check for connection to db
         if (!db.checkConnection()) {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(500).json({ message: "Internal server error db connection" });
         }
 
         const userRegistered = await db.exec("insertOrUpdateUser", {
+            id: user.id,
             name: user.name,
             email: user.email,
             password: user.password,
             is_admin: user.is_admin,
             is_deleted: user.is_deleted,
             is_sent: user.is_sent,
-            created_at: user.created_at,
-            updated_at: user.updated_at,
+            created_at: user.created_at.toString(),
+            updated_at: user.updated_at.toString()
         });
 
         if (userRegistered) {
@@ -82,7 +84,7 @@ export const login = async (req: Request, res: Response) => {
             return res.status(500).json({ message: "Internal server error" });
         }
 
-        const user: UserModel = await db.exec("getUserByEmail", { email: email }) as unknown as UserModel;
+        const user: UserModel[] = await db.exec("getUserByEmail", { email: email }) as unknown as UserModel[];
 
         if (!user) {
             return res.status(400).json({ message: "User not found" });
@@ -92,13 +94,13 @@ export const login = async (req: Request, res: Response) => {
         const hashedPassword = await bcrypt.hash(password, salt);
 
 
-        const validPassword = await bcrypt.compare(hashedPassword, user.password);
+        const validPassword = await bcrypt.compare(password, user[0].password);
         if (!validPassword) {
             return res.status(400).json({ message: "Invalid password" });
         }
 
         const token = jwt.sign(
-            { id: user.id, email: user.email, name: user.name },
+            { id: user[0].id, email: user[0].email, name: user[0].name },
             process.env.JWT_SECRET as string,
             {
                 expiresIn: "1h",
@@ -167,27 +169,38 @@ export const updateUser = async (req: Request, res: Response) => {
         const { id } = req.params;
         // get user from db
 
-        const user: UserModel = await db.exec("getUserById", { id: id }) as unknown as UserModel;
+        const user: UserModel[] = await db.exec("getUserById", { id: id }) as unknown as UserModel[];
 
         if (!user) {
             return res.status(400).json({ message: "User not found" });
         }
-
         const { name, email, password } = req.body;
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
+         // this.id = id;
+        // this.name = name;
+        // this.email = email;
+        // this.password = password;
+        // this.created_at = created_at;
+        // this.updated_at = updated_at;
+        // this.is_sent = is_sent;
+        // this.is_admin = is_admin;
+        // this.is_deleted = is_deleted;
+        
         const updatedUser = new UserModel(
-            user.id,
+            user[0].id,
             name,
             email,
             hashedPassword,
-            user.is_admin,
-            user.is_deleted,
-            user.is_sent,
-            user.created_at,
-            new Date().toISOString()
+            new Date(user[0].created_at).toISOString(),
+            new Date().toISOString(),
+            user[0].is_sent.toString()==='false'?'0':'1',
+            user[0].is_admin.toString()==='false'?'0':'1',
+            user[0].is_deleted.toString()==='false'?'0':'1'
 
         );
+
+        console.log(updatedUser)
 
 
         const { error } = validateUser(updatedUser);

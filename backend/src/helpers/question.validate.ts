@@ -2,9 +2,9 @@ import QuestionModel from "../models/question.model";
 import Joi from "joi";
 
 const questionSchema = Joi.object({
-    question: Joi.string().min(3).max(30).required(),
-    description: Joi.string().min(3).max(30).required(),
-    code: Joi.string().min(3).max(30).required(),
+    question: Joi.string().required(),
+    description: Joi.string().required(),
+    code: Joi.string().required(),
     is_deleted: Joi.string().required(),
     created_at: Joi.string().required(),
     updated_at: Joi.string().required(),

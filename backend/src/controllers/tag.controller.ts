@@ -7,6 +7,14 @@ import dotenv from "dotenv";
 import validateTag from "../helpers/tag.validate";
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
+
+// id: string;
+// tag: string;
+// description: string;
+// created_at: string;
+// updated_at: string;
+// is_deleted: string;
+
 export const createTag:RequestHandler = async (req: Request, res: Response) => {
     try {
         const { tag, description } = req.body;
@@ -14,9 +22,9 @@ export const createTag:RequestHandler = async (req: Request, res: Response) => {
             uuidv4(),
             tag,
             description,
-            "0",
             new Date().toISOString(),
-            new Date().toISOString()
+            new Date().toISOString(),
+            "0"
         );
         const { error } = validateTag(tagModel);
         if (error) {
@@ -24,9 +32,10 @@ export const createTag:RequestHandler = async (req: Request, res: Response) => {
         }
         // check for connection to db
         if (!db.checkConnection()) {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(500).json({ message: "Internal server error DB" });
         }
         const tagCreated = await db.exec("insertOrUpdateTag", {
+            id: tagModel.id,
             tag: tagModel.tag,
             description: tagModel.description,
             is_deleted: tagModel.is_deleted,
@@ -39,6 +48,7 @@ export const createTag:RequestHandler = async (req: Request, res: Response) => {
         }
         return res.status(400).json({ message: "Tag not created" });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -48,7 +58,7 @@ export const getAllTags:RequestHandler = async (req: Request, res: Response) => 
     try {
         // check for connection to db
         if (!db.checkConnection()) {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(500).json({ message: "Internal server error DB" });
         }
         const tags = await db.exec("getAllTags", {});
         if (tags) {
@@ -56,6 +66,7 @@ export const getAllTags:RequestHandler = async (req: Request, res: Response) => 
         }
         return res.status(400).json({ message: "Tags not found" });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
@@ -85,19 +96,22 @@ export const updateTag:RequestHandler = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         // get tag by id
-        const tagToUpdate: TagModel = await db.exec("getTagById", { id }) as unknown as TagModel;
+        const tagToUpdate: TagModel[] = await db.exec("getTagById", { id }) as unknown as TagModel[];
+        console.log(tagToUpdate[0].is_deleted);
         if (!tagToUpdate) {
             return res.status(400).json({ message: "Tag not found" });
         }
+        
         const { tag, description } = req.body;
         const tagModel = new TagModel(
             id,
             tag,
             description,
-            tag.is_deleted,
-            tag.created_at,
-            new Date().toISOString()
+            new Date(tagToUpdate[0].created_at).toISOString(),
+            new Date().toISOString(),
+            tagToUpdate[0].is_deleted.toString() === "true" ? "1" : "0"
         );
+        console.log(tagModel);
         const { error } = validateTag(tagModel);
         if (error) {
             return res.status(400).json({ message: error.details[0].message });
@@ -107,7 +121,6 @@ export const updateTag:RequestHandler = async (req: Request, res: Response) => {
             return res.status(500).json({ message: "Internal server error" });
         }
 
-        // update tag
 
         const updatedTag = await db.exec("insertOrUpdateTag", {
             id: tagModel.id,
@@ -123,6 +136,7 @@ export const updateTag:RequestHandler = async (req: Request, res: Response) => {
         }
         return res.status(400).json({ message: "Tag not updated" });
     } catch (error) {
+        console.log(error);
         return res.status(500).json({ message: "Internal server error" });
     }
 }
