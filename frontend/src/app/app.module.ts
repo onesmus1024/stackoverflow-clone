@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,16 @@ import { _loggedInUserReducer } from './state/reducers/loggedInUser.reducer';
 import { LoggedInUserEffects } from './state/effects/loggedInUser.effect';
 import { RegisterUserEffects } from './state/effects/registerUser.effect';
 import { registerUserReducer } from './state/reducers/registerUser.reducer';
+import { questionVotesReducer } from './state/reducers/questionVote.reducer';
+import { QuestionVoteEffects } from './state/effects/questionVote.effect';
+import { commentsReducer } from './state/reducers/comment.reducer';
+import { CommentEffects } from './state/effects/comment.effect';
+import { answerVotesReducer } from './state/reducers/answerVote.redicer';
+import { AnswerVoteEffects } from './state/effects/answerVote.effect';
+import { answersReducer } from './state/reducers/answer.reducer';
+import { AnswerEffects } from './state/effects/answer.effect';
+
+
 
 
 import { HomePageComponent } from './pages/home/home-page/home-page.component';
@@ -88,12 +99,13 @@ children : [
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreRouterConnectingModule.forRoot(),
-    StoreModule.forRoot({ questions: questionsReducer, users: usersReducer, tags: tagsReducer, companies: companiesReducer , loggedInUser: _loggedInUserReducer, router: routerReducer, registerUser: registerUserReducer }),
+    StoreModule.forRoot({ questions: questionsReducer, users: usersReducer, tags: tagsReducer, companies: companiesReducer , loggedInUser: _loggedInUserReducer, router: routerReducer, registerUser: registerUserReducer, questionVotes: questionVotesReducer, comments: commentsReducer, answerVotes: answerVotesReducer, answers: answersReducer}),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([QuestionEffects, UserEffects, TagsEffects, CompaniesEffects, LoggedInUserEffects, RegisterUserEffects]),
+    EffectsModule.forRoot([QuestionEffects, UserEffects, TagsEffects, CompaniesEffects, LoggedInUserEffects, RegisterUserEffects, QuestionVoteEffects, CommentEffects, AnswerVoteEffects, AnswerEffects]),
     MatIconModule,
     RouterModule.forRoot(router),
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

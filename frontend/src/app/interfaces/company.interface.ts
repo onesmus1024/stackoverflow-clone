@@ -1,6 +1,7 @@
 import { Tag } from "./tag.interface";
 
 export interface Company {
+    tag_id: string;
     id: string;
     name: string;
     logo_url: string;

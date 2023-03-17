@@ -13,6 +13,7 @@ export class SingleCompanyComponent {
 
 
   @Input()company: Company = {
+    tag_id: '0',
     id: '0',
     name: 'microverse',
     logo_url: 'https://www.microverse.org/assets/img/logo.png',

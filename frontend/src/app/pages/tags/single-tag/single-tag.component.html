@@ -5,8 +5,8 @@
     <div class="tag-info">
         <p class="description">{{tag.description}}</p>
         <div class="date">
-            <p class="created">Created: {{tag.created_at}}</p>
-            <p class="updated">Updated: {{tag.updated_at}}</p>
+            <p class="created">Created: {{tag.created_at|date:'medium'}}</p>
+            <p class="updated">Updated: {{tag.updated_at|date:'medium'}}</p>
         </div>
     </div>
 </div>
