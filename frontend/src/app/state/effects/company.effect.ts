@@ -1,8 +1,6 @@
 import { createEffect, ofType,Actions } from "@ngrx/effects";
 import { Injectable } from "@angular/core";
 import { map, mergeMap, catchError } from "rxjs/operators";
-import { Observable } from "rxjs";
-
 import { CompanyService } from "../../services/company.service";
 
 
