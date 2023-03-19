@@ -30,11 +30,13 @@ export const sendWelcomeEmail = async () => {
                         html: data
                     }
                     await sendMail(mainOptions);
-                    pool.request().query(`UPDATE users SET is_sent = "1" WHERE id = ${usersList[i].id}`);
+        
+                    await pool.request().query(`UPDATE users SET is_sent ='1' WHERE id ='${usersList[i].id}'`)
                 }
             }
 
             )
+            console.log(usersList[i].name);
         }
     } catch (err) {
         console.log(err);
