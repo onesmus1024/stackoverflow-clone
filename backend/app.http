@@ -12,8 +12,8 @@ POST http://localhost:4000/api/users/register
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@gmail.com",
+  "name": "Onesmus",
+  "email": "onesmuswambugu135@gmail.com",
   "password": "123456"
 }
 
@@ -71,7 +71,7 @@ PUT http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
 Content-Type: application/json
 
 {
-  "tag": "js",  
+  "tag": "javascript",  
   "description": "It is a programming language for the web"
 }
 
@@ -165,7 +165,7 @@ Content-Type: application/json
 
   "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
   "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
-  "vote": -1
+  "vote": 1
 
 }
 
@@ -248,7 +248,7 @@ Content-Type: application/json
 {
   "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
   "answer_id":"04396c5d-1182-4e4a-91e2-2132f00ed4a2",
-  "vote": 1
+  "vote": -1
 
 }
 
@@ -261,7 +261,7 @@ Content-Type: application/json
 {
   "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
   "answer_id":"04396c5d-1182-4e4a-91e2-2132f00ed4a2",
-  "vote": -1
+  "vote": 1
 
 }
 
@@ -354,6 +354,19 @@ Content-Type: application/json
   "tag_id":"53dc6a4e-2aa9-414a-b95e-a0e7d6156998",
   "description": "Google is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.",
   "is_deleted": "1"
+
+}
+
+
+# forgot password
+
+### forgot password
+
+POST http://localhost:4000/api/password/forgot-password
+Content-Type: application/json
+
+{
+  "email": "onesmuswambugu135@gmail.com"
 
 }
 

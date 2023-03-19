@@ -150,7 +150,7 @@ export const getAllUsers = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "No users found" });
         }
 
-        return res.status(200).json({ message: "Users found", users });
+        return res.status(200).json(users);
     }
     catch (err: any) {
         res.status(500).json({ message: err.message });

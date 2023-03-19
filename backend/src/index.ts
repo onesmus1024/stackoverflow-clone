@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import cors from "cors";
+import emoji from "node-emoji";
 import path from "path";
 import dotenv from "dotenv";
 import { Request, Response } from "express";
@@ -11,6 +12,7 @@ import questionRouter from "./routers/question.router";
 import questionVoteRouter from "./routers/questionVote.router";
 import tagRouter from "./routers/tag.router";
 import companyRouter from "./routers/company.router";
+import resetPasswordRouter from "./routers/reset-password.router";
 
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
@@ -27,15 +29,16 @@ app.use("/api/questions", questionRouter);
 app.use("/api/questionVotes", questionVoteRouter);
 app.use("/api/tags", tagRouter);
 app.use("/api/companies", companyRouter);
+app.use("/api/password", resetPasswordRouter);
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World!");
+    res.send(emoji.get("rocket")+ " Server running");
 }
 );
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+    console.log(emoji.get("rocket"), `Server running on port ${process.env.PORT}`);
 }
 );
 
