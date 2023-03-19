@@ -31,19 +31,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(UsersActions.loadUsers());
+    this.store.dispatch(AnswerVoteActions.loadAnswerVotes());
     this.store.dispatch(TagsActions.loadTags());
     this.store.dispatch(CompaniesActions.loadCompanies());
-    this.store.dispatch(QuestionsActions.loadQuestions());
-    this.store.dispatch(UsersActions.loadUsers());
-    this.store.dispatch(QuestionVoteActions.loadQuestionVotes());
     this.store.dispatch(CommentActions.loadComments());
-    this.store.dispatch(AnswerVoteActions.loadAnswerVotes());
     this.store.dispatch(AnswerActions.loadAnswers());
+    this.store.dispatch(QuestionsActions.loadQuestions());
+    this.store.dispatch(QuestionVoteActions.loadQuestionVotes());
 
-
-    // const modal = this.modalHost.viewContainerRef;
-    // modal.clear();
-    // modal.createComponent(ModalComponent);
   }
 
   

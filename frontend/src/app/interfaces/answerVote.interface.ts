@@ -1,6 +1,7 @@
 import { User } from "./user.interface";
 
 export interface AnswerVote {
+    user_id: string;
     id: string;
     vote: number;
     created_at: string;
