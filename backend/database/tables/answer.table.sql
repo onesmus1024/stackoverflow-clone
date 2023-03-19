@@ -13,10 +13,9 @@ CREATE TABLE answers
     code VARCHAR ( 255 ) NOT NULL ,
     is_deleted BIT DEFAULT  0 ,
     is_accepted BIT DEFAULT  0 ,
+    is_sent BIT DEFAULT  0 ,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (question_id) REFERENCES questions(id),
     CONSTRAINT FK_answers_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     
 );
-
-

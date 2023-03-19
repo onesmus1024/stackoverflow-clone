@@ -11,7 +11,8 @@ const answerSchema = Joi.object({
     code: Joi.string().required(),
     id: Joi.string().required(),
     is_deleted: Joi.string().required(),
-    is_accepted: Joi.string().required()
+    is_accepted: Joi.string().required(),
+    is_sent: Joi.string().required()
 })
 
 const validateAnswer = (answer:AnswerModel) => {

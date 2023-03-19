@@ -12,8 +12,8 @@ POST http://localhost:4000/api/users/register
 Content-Type: application/json
 
 {
-  "name": "Onesmus",
-  "email": "onesmuswambugu135@gmail.com",
+  "name": "Simon",
+  "email": "simomutu8@gmail.com",
   "password": "123456"
 }
 
@@ -193,10 +193,11 @@ Content-Type: application/json
 
 {
   "answer": "A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).",
-  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "user_id":"a13ab93c-7189-49ed-b370-6b05a3337b46",
   "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
   "code": "class Person { constructor(name, age) { this.name = name; this.age = age; } } const person1 = new Person('John', 30);",
-  "is_accepted": "1"
+  "is_accepted": "1",
+  "is_sent": "0"
 
 }
 
@@ -204,16 +205,17 @@ Content-Type: application/json
 
 ### update answer
 
-PUT http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
+PUT http://localhost:4000/api/answers/3bc84fe0-39c9-4f43-8437-80def891fc69
 Content-Type: application/json
 
 {
 
   "answer": "A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).",
-  "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
+  "user_id":"a13ab93c-7189-49ed-b370-6b05a3337b46",
   "question_id":"6f3accae-2690-4b46-8183-c886580fa6de",
   "code": "class Person { constructor(name, age) { this.name = name; this.age = age; } } const person1 = new Person('John', 30);",
-  "is_accepted": "1"
+  "is_accepted": "1",
+  "is_sent": "0"
 
 }
 

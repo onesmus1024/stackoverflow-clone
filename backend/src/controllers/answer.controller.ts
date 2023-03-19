@@ -15,16 +15,8 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
 
     try {
 
-        const { answer, user_id, question_id, code,is_accepted } = req.body;
-        // id: string;
-        // answer: string;
-        // created_at: string;
-        // updated_at: string;
-        // user_id: string;
-        // question_id: string;
-        // code: string;
-        // is_deleted: string;
-        // is_accepted: string;
+        const { answer, user_id, question_id, code,is_accepted,is_sent } = req.body;
+   
         const answerModel = new AnswerModel(
             uuidv4(),
             answer,
@@ -34,7 +26,8 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
             question_id,
             code,
             "0",
-            is_accepted
+            is_accepted,
+            is_sent
         );
 
 
@@ -60,7 +53,8 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
             question_id: answerModel.question_id,
             code: answerModel.code,
             is_deleted: answerModel.is_deleted,
-            is_accepted: answerModel.is_accepted
+            is_accepted: answerModel.is_accepted,
+            is_sent: answerModel.is_sent
         });
 
 
@@ -139,7 +133,7 @@ export const updateAnswer: RequestHandler = async (req: Request, res: Response) 
     try {
 
         const { id } = req.params;
-        const { answer, code,is_accepted } = req.body;
+        const { answer, code,is_accepted,is_sent} = req.body;
 
         // check for connection to db
         if (!db.checkConnection()) {
@@ -163,7 +157,8 @@ export const updateAnswer: RequestHandler = async (req: Request, res: Response) 
             answerToUpdate[0].question_id,
             code,
             answerToUpdate[0].is_deleted.toString(),
-            is_accepted.toString()
+            is_accepted.toString(),
+            is_sent.toString()
         );
 
         const { error } = validateAnswer(answerModel);
@@ -182,7 +177,8 @@ export const updateAnswer: RequestHandler = async (req: Request, res: Response) 
             question_id: answerModel.question_id,
             code: answerModel.code,
             is_deleted: answerModel.is_deleted,
-            is_accepted: answerModel.is_accepted
+            is_accepted: answerModel.is_accepted,
+            is_sent: answerModel.is_sent
         });
 
         if (answerUpdated) {
