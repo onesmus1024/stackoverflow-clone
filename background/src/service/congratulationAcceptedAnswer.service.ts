@@ -21,6 +21,7 @@ export const sendCongratulationEmail = async () => {
         console.log("acceptedAnswersList",acceptedAnswersList);
 
         for(let i = 0; i < acceptedAnswersList.length; i++){
+            let URL = `http://localhost:3000/verify/${acceptedAnswersList[i].id}`;
             // get the user id from the accepted answer
             const userId = acceptedAnswersList[i].user_id;
             // get the user email from the user id
@@ -28,7 +29,7 @@ export const sendCongratulationEmail = async () => {
             const usersAnswerAcceptedList = usersAnswerAccepted.recordset;
             console.log("usersAnswerAcceptedList",usersAnswerAcceptedList);
 
-            ejs.renderFile(path.resolve(__dirname, '../templates/congratulationAcceptedAnswer.ejs'), { name: usersAnswerAcceptedList[0].name }, async (err, data) => {
+            ejs.renderFile(path.resolve(__dirname, '../templates/congratulationAcceptedAnswer.ejs'), { name: usersAnswerAcceptedList[0].name,URL:URL }, async (err, data) => {
                 if (err) {
                     console.log(err);
                 } else {

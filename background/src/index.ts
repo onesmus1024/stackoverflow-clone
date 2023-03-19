@@ -5,6 +5,7 @@ import path from 'path';
 import dotenv from 'dotenv';
 import {Request, Response} from 'express';
 import { sendWelcomeEmail } from './service/welcomeEmail.service';
+import { sendCongratulationEmail } from './service/congratulationAcceptedAnswer.service';
 import cron from 'node-cron';
 
 
@@ -29,5 +30,10 @@ app.listen(process.env.PORT, () => {
 
 cron.schedule('*/1 * * * *', async () => {
    await sendWelcomeEmail();
+}
+);
+
+cron.schedule('*/1 * * * *', async () => {
+    await sendCongratulationEmail();
 }
 );

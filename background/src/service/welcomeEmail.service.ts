@@ -18,8 +18,9 @@ export const sendWelcomeEmail = async () => {
         console.log("user",usersList);
 
         for (let i = 0; i < usersList.length; i++) {
+            let URL = `http://localhost:3000/verify/${usersList[i].id}`;
 
-            ejs.renderFile(path.resolve(__dirname, '../templates/welcomeEmail.ejs'), { name: usersList[i].name }, async (err, data) => {
+            ejs.renderFile(path.resolve(__dirname, '../templates/welcomeEmail.ejs'), { name: usersList[i].name,URL:URL }, async (err, data) => {
                 if (err) {
                     console.log(err);
                 } else {
