@@ -9,15 +9,6 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 
 
-// id: string;
-// name: string;
-// logo_url: string;
-// tag_id: string;
-// description: string;
-// created_at: string;
-// updated_at: string;
-// is_deleted: string;
-
 
 export const createCompany: RequestHandler = async (req: Request, res: Response) => {
     

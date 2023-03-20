@@ -8,16 +8,6 @@ import validateQuestion from "../helpers/question.validate";
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 
-// id: string;
-// question: string;
-// description: string;
-// code: string;
-// created_at: string;
-// updated_at: string;
-// user_id: string;
-// views: number;
-// is_deleted: string;
-
 
 
 export const createQuestion: RequestHandler = async (req: Request, res: Response) => {

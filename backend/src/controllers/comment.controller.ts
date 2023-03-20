@@ -7,25 +7,12 @@ import dotenv from "dotenv";
 import validateComment from "../helpers/comment.validate";
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
-// id: string;
-// comment: string;
-// created_at: string;
-// updated_at: string;
-// user_id: string;
-// answer_id: string;
-// is_deleted: string;
 
 export const createComment: RequestHandler = async (req: Request, res: Response) => {
     try{
 
         const { comment, user_id, answer_id,is_deleted } = req.body;
-        // id: string;
-        // comment: string;
-        // created_at: string;
-        // updated_at: string;
-        // user_id: string;
-        // answer_id: string;
-        // is_deleted: string;
+
         const commentModel = new CommentModel(
             uuidv4(),
             comment,

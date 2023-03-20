@@ -135,9 +135,9 @@ export const updateTag:RequestHandler = async (req: Request, res: Response) => {
             return res.status(200).json(updatedTag);
         }
         return res.status(400).json({ message: "Tag not updated" });
-    } catch (error) {
+    } catch (error: any) {
         console.log(error);
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: error.message });
     }
 }
 
@@ -162,8 +162,8 @@ export const deleteTag:RequestHandler = async (req: Request, res: Response) => {
             return res.status(200).json({ message: "Tag deleted" });
         }
         return res.status(400).json({ message: "Tag not deleted" });
-    } catch (error) {
-        return res.status(500).json({ message: "Internal server error" });
+    } catch (error: any) {
+        return res.status(500).json({ message: error.message });
     }
 }
 

@@ -8,14 +8,7 @@ import validateAnswerVote from "../helpers/answerVote.validate";
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 
-// create answer vote
-// id: string;
-// created_at: string;
-// updated_at: string;
-// user_id: string;
-// answer_id: string;
-// is_deleted: string;
-// vote: number;
+
 export const createAnswerVote: RequestHandler = async (req: Request, res: Response) => {
     try {
         const { user_id, answer_id, vote } = req.body;

@@ -177,15 +177,7 @@ export const updateUser = async (req: Request, res: Response) => {
         const { name, email, password } = req.body;
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
-         // this.id = id;
-        // this.name = name;
-        // this.email = email;
-        // this.password = password;
-        // this.created_at = created_at;
-        // this.updated_at = updated_at;
-        // this.is_sent = is_sent;
-        // this.is_admin = is_admin;
-        // this.is_deleted = is_deleted;
+       
         
         const updatedUser = new UserModel(
             user[0].id,

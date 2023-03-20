@@ -121,8 +121,8 @@ export const getAnswerById: RequestHandler = async (req: Request, res: Response)
             return res.status(500).json({ message: "Internal server error" });
         }
     }
-    catch (err) {
-        return res.status(500).json({ message: "Internal server error" });
+    catch (err: any) {
+        return res.status(500).json({ message: err.message });
     }
 }
 
@@ -190,8 +190,8 @@ export const updateAnswer: RequestHandler = async (req: Request, res: Response) 
 
 
     }
-    catch (err) {
-        return res.status(500).json({ message: "Internal server error" });
+    catch (err: any) {
+        return res.status(500).json({ message: err.message });
     }
 }
 
@@ -224,8 +224,8 @@ export const deleteAnswer: RequestHandler = async (req: Request, res: Response) 
 
         }
 
-        catch (err) {
-            return res.status(500).json({ message: "Internal server error" });
+        catch (err: any) {
+            return res.status(500).json({ message: err.message });
         }
     }
 
