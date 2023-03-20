@@ -21,7 +21,7 @@ export const sendCongratulationEmail = async () => {
         console.log("acceptedAnswersList",acceptedAnswersList);
 
         for(let i = 0; i < acceptedAnswersList.length; i++){
-            let URL = `http://localhost:3000/verify/${acceptedAnswersList[i].id}`;
+            let URL = `https://molynew.com`;
             // get the user id from the accepted answer
             const userId = acceptedAnswersList[i].user_id;
             // get the user email from the user id
