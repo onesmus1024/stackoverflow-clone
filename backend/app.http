@@ -3,9 +3,13 @@
 
 ### get all users
 GET http://localhost:4000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
+
+
 
 ### get user by id
 GET http://localhost:4000/api/users/20148ddd-1362-466b-9a8e-607497c76b48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 ### create user
 POST http://localhost:4000/api/users/register
@@ -21,6 +25,8 @@ Content-Type: application/json
 ### update user
 PUT http://localhost:4000/api/users/20148ddd-1362-466b-9a8e-607497c76b48
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
+
 
 {
       "name": "John Doe",
@@ -32,6 +38,8 @@ Content-Type: application/json
 ### delete user
 
 DELETE http://localhost:4000/api/users/20148ddd-1362-466b-9a8e-607497c76b48
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
+
 
 
 ### login user
@@ -51,6 +59,8 @@ Content-Type: application/json
 
 ### get all tags
 GET http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
+
 
 
 
@@ -59,6 +69,8 @@ GET http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
 ### create tag
 POST http://localhost:4000/api/tags
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
+
 
 {
   "tag": "js",  
@@ -69,6 +81,7 @@ Content-Type: application/json
 ### update tag
 PUT http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "tag": "javascript",  
@@ -79,7 +92,7 @@ Content-Type: application/json
 ### delete tag
 
 DELETE http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 # Questions
@@ -87,17 +100,19 @@ DELETE http://localhost:4000/api/tags/53dc6a4e-2aa9-414a-b95e-a0e7d6156998
 ### get all questions
 
 GET http://localhost:4000/api/questions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### get question by id
 
 GET http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 ### create question
 
 POST http://localhost:4000/api/questions
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "question": "What is the difference between a class and an object?",
@@ -112,6 +127,7 @@ Content-Type: application/json
 
 PUT http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
 
@@ -127,6 +143,7 @@ Content-Type: application/json
 ### delete question
 
 DELETE http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -136,17 +153,20 @@ DELETE http://localhost:4000/api/questions/6f3accae-2690-4b46-8183-c886580fa6de
 ### get all question votes
 
 GET http://localhost:4000/api/questionVotes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### get question vote by id
 
 GET http://localhost:4000/api/questionVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### create question vote
 
 POST http://localhost:4000/api/questionVotes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
 
@@ -160,6 +180,7 @@ Content-Type: application/json
 
 PUT http://localhost:4000/api/questionVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
 
@@ -176,12 +197,13 @@ Content-Type: application/json
 ### get all answers
 
 GET http://localhost:4000/api/answers
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### get answer by id
 
 GET http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -190,6 +212,7 @@ GET http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
 
 POST http://localhost:4000/api/answers
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "answer": "A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).",
@@ -207,6 +230,7 @@ Content-Type: application/json
 
 PUT http://localhost:4000/api/answers/3bc84fe0-39c9-4f43-8437-80def891fc69
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
 
@@ -223,6 +247,7 @@ Content-Type: application/json
 ### delete answer
 
 DELETE http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -234,11 +259,13 @@ DELETE http://localhost:4000/api/answers/04396c5d-1182-4e4a-91e2-2132f00ed4a2
 ### get all answer votes
 
 GET http://localhost:4000/api/answerVotes
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### get answer vote by id
 
 GET http://localhost:4000/api/answerVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -246,6 +273,7 @@ GET http://localhost:4000/api/answerVotes/1df4a3a5-d584-4769-9969-8ac1300eaf35
 
 POST http://localhost:4000/api/answerVotes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
@@ -259,6 +287,7 @@ Content-Type: application/json
 
 PUT http://localhost:4000/api/answerVotes/3f9c645a-9cb9-4342-a3d5-bc9b9c39604a
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "user_id":"20148ddd-1362-466b-9a8e-607497c76b48",
@@ -273,11 +302,13 @@ Content-Type: application/json
 
 
 GET http://localhost:4000/api/comments
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### get comment by id
 
 GET http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -285,6 +316,7 @@ GET http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
 
 POST http://localhost:4000/api/comments
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "comment": "This is a comment",
@@ -299,6 +331,7 @@ Content-Type: application/json
 
 PUT http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "comment": "This is a comment",
@@ -312,7 +345,7 @@ Content-Type: application/json
 ### delete comment
 
 DELETE http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -322,11 +355,13 @@ DELETE http://localhost:4000/api/comments/dc7ce31d-24b6-417f-9e61-ebe9633775ef
 ### get all companies
 
 GET http://localhost:4000/api/companies
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 ### get company by id
 
 GET http://localhost:4000/api/companies/1aced642-4712-4e26-9920-cd08f5c8cd05
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 
 
@@ -334,6 +369,7 @@ GET http://localhost:4000/api/companies/1aced642-4712-4e26-9920-cd08f5c8cd05
 
 POST http://localhost:4000/api/companies
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "name": "Google",
@@ -349,6 +385,7 @@ Content-Type: application/json
 
 PUT http://localhost:4000/api/companies/1aced642-4712-4e26-9920-cd08f5c8cd05
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "name": "Google",
@@ -366,6 +403,7 @@ Content-Type: application/json
 
 POST http://localhost:4000/api/password/forgot-password
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIwMTQ4ZGRkLTEzNjItNDY2Yi05YThlLTYwNzQ5N2M3NmI0OCIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJuYW1lIjoiSm9obiBEb2UiLCJpYXQiOjE2NzkyOTc4NzQsImV4cCI6MTY3OTMwMTQ3NH0.tck4xcrvnTr5OW10Im59I5191kUOYQerBGRb4I7xo1Y
 
 {
   "email": "onesmuswambugu135@gmail.com"
