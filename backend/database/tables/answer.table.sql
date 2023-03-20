@@ -19,3 +19,15 @@ CREATE TABLE answers
     CONSTRAINT FK_answers_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     
 );
+
+
+USE STACKOVERFLOW;
+GO
+ALTER TABLE answers
+DROP CONSTRAINT FK_answers_user_id_users_id;
+
+ALTER TABLE answers
+ADD CONSTRAINT FK_answers_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION;
+
+ALTER TABLE answers
+ADD CONSTRAINT FK_answers_question_id_questions_id FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE;

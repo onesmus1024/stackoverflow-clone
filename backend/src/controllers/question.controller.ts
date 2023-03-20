@@ -77,7 +77,7 @@ export const getAllQuestions : RequestHandler = async (req: Request, res: Respon
             return res.status(500).json({ message: "Internal server error" });
         }
 
-        const questions = await db.exec("getAllQuestions", {});
+        const questions = await db.exec("getAllQuestions", {page:'1',pageSize:'10'});
 
         if (questions) {
             return res.status(200).json(questions);

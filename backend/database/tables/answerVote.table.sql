@@ -17,3 +17,18 @@ CREATE TABLE answer_votes
 
 );
 
+
+
+USE STACKOVERFLOW;
+GO
+
+ALTER TABLE answer_votes
+DROP CONSTRAINT FK_answer_votes_user_id_users_id;
+
+ALTER TABLE answer_votes
+ADD CONSTRAINT FK_answer_votes_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION;
+
+ALTER TABLE answer_votes
+ADD CONSTRAINT FK_answer_votes_answer_id_answers_id FOREIGN KEY (answer_id) REFERENCES answers(id) ON DELETE CASCADE;
+
+

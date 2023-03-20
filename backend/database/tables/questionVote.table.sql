@@ -16,3 +16,19 @@ CREATE TABLE question_votes
     CONSTRAINT FK_question_votes_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
 
 );
+
+
+
+USE STACKOVERFLOW;
+GO
+
+ALTER TABLE question_votes
+DROP CONSTRAINT FK_question_votes_user_id_users_id;
+
+ALTER TABLE question_votes
+ADD CONSTRAINT FK_question_votes_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION;
+
+
+ALTER TABLE question_votes
+ADD CONSTRAINT FK_question_votes_question_id_questions_id FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE;
+

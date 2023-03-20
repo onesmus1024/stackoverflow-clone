@@ -17,3 +17,17 @@ CREATE TABLE comments
 );
 
 
+
+USE STACKOVERFLOW;
+GO
+
+ALTER TABLE comments
+DROP CONSTRAINT FK_comments_user_id_users_id;
+
+ALTER TABLE comments
+ADD CONSTRAINT FK_comments_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE NO ACTION;
+
+ALTER TABLE comments
+ADD CONSTRAINT FK_comments_answer_id_answers_id FOREIGN KEY (answer_id) REFERENCES answers(id) ON DELETE CASCADE;
+
+

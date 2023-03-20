@@ -6,6 +6,7 @@ import path from "path";
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+   
     const bearerHeader = req.headers["authorization"];
     if (typeof bearerHeader !== "undefined") {
         const bearer = bearerHeader.split(" ");
