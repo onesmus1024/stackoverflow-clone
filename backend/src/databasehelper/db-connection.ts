@@ -30,12 +30,12 @@ class DatabaseConnect{
     async exec(sp:string,data:{[x:string]:string}={})  {
 
         let emptyRequest =await  (await this.pool).request()
-        console.log("data",data);
+      
         
 
         let request= this.createRequest(emptyRequest,data)
         let result = await (await request.execute(sp)).recordset
-        console.log("result",result);
+    
         
 
         return result

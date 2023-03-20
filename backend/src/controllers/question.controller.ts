@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from "uuid";
 import path from "path";
 import dotenv from "dotenv";
 import validateQuestion from "../helpers/question.validate";
+import { Question } from "../interfaces/question.interface";
+import { Answer } from "../interfaces/answer.interface";
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 
@@ -76,10 +78,40 @@ export const getAllQuestions : RequestHandler = async (req: Request, res: Respon
         if (!db.checkConnection()) {
             return res.status(500).json({ message: "Internal server error" });
         }
+        
 
-        const questions = await db.exec("getAllQuestions", {page:'1',pageSize:'10'});
+        const questions:Question[] =await (await db.exec("getAllQuestions", {page:'1',pageSize:'10'})) as Question[];
+
+
 
         if (questions) {
+       
+            const getFormattedQuestions = async (questions:Question[]) => {
+                return Promise.all(questions.map(async (question:Question) => {
+                    let answers = (await (await db.exec("getAnswersByQuestionId", { question_id: question.id })) as Answer[]).map(async (answer: Answer) => {
+                        let user = await db.exec("getUserById", { id: answer.user_id });
+                        let answerVotes = await db.exec("getAnswerVoteByAnswerId", { answer_id: answer.id });
+                        answer.votes = answerVotes;
+                        let answerComments = await db.exec("getAnswerCommentByAnswerId", { answer_id: answer.id });
+                        answer.comments = answerComments;
+                        answer.user = user[0];
+                        return answer;
+                    });
+                    question.answers = answers as unknown as Answer[];
+                    let tags = await db.exec("getTagById", { id: question.tag_id });
+                    question.tags = tags;
+                    let user = await db.exec("getUserById", { id: question.user_id });
+                    question.user = user[0];
+
+                    console.log(question)
+
+                    return question;
+                }));
+            }
+
+            await getFormattedQuestions(questions);
+
+            
             return res.status(200).json(questions);
         }
 

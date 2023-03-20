@@ -103,7 +103,7 @@ export const login = async (req: Request, res: Response) => {
             { id: user[0].id, email: user[0].email, name: user[0].name },
             process.env.JWT_SECRET as string,
             {
-                expiresIn: "1h",
+                expiresIn: "5h",
             }
         );
         return res.status(200).json({ message: "User logged in", token, user });
