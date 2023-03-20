@@ -9,6 +9,8 @@ import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,6 +57,7 @@ import { PrivacyComponent } from './pages/privacy/privacy.component';
 import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.component';
 import { AllQuestionsComponent } from './pages/admin/all-questions/all-questions.component';
 import { AllUsersComponent } from './pages/admin/all-users/all-users.component';
+import { TokenInterceptorService } from './services/auth/interceptor/token-interceptor.service';
 
 const router: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -107,7 +110,13 @@ children : [
     FontAwesomeModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

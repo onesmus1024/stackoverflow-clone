@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Company } from '../../interfaces/company.interface';
+import { Company } from 'src/app/interfaces/company.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
 import { SingleCompanyComponent } from './single-company/single-company.component';

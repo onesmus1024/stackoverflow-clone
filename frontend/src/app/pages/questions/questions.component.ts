@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppState } from '../../app.state';
 import { Store } from '@ngrx/store';
-import { Question } from '../../interfaces/question.interface';
+import { Question } from 'src/app/interfaces/question.interface';
 import { SingleQuestionComponent } from './single-question/single-question.component';
 import { RouterModule } from '@angular/router';
 

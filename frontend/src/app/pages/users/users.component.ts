@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../app.state';
-import { User } from '../../interfaces/user.interface';
+import { User } from 'src/app/interfaces/user.interface';
 import { SingleUserComponent } from './single-user/single-user.component';
 
 @Component({

@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http'
 })
 export class QuestionService {
 
+
+
   questions: Question[] = [
     {
       id: '1',
@@ -106,12 +108,10 @@ export class QuestionService {
       
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getQuestions():Observable< Question[] > {
-    return new Observable( observer => {
-      observer.next(this.questions);
-    });
+    return this.http.get<Question[]>('http://localhost:4000/api/questions');
   }
 
        
