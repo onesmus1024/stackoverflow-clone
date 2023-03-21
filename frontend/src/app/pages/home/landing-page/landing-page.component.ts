@@ -11,11 +11,11 @@ import { RouterModule } from '@angular/router';
 })
 export class LandingPageComponent {
   engineers = [
-    'software engineer',
-    'web developer',
-    'full stack developer',
-    'system administrator',
-    'devops engineer',];
+    'Software Engineer',
+    'Web Developer',
+    'Full Stack Developer',
+    'System Administrator',
+    'Devops Engineer',];
   engineer = this.engineers[0];
 
   constructor() { }

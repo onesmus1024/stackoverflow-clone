@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Question } from 'src/app/interfaces/question.interface';
 import { SingleQuestionComponent } from './single-question/single-question.component';
 import { RouterModule } from '@angular/router';
+import { selectQuestions } from 'src/app/state/selectors/question.selector';
 
 @Component({
   selector: 'app-questions',
@@ -22,8 +23,8 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select('questions').subscribe(questions => {
-      this.questions = questions.questions as Question[];
+    this.store.select( selectQuestions).subscribe(questions => {
+      this.questions =questions as Question[];
       console.log(this.questions as Question[]);
       
       

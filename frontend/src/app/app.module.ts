@@ -58,23 +58,24 @@ import { AdminHomeComponent } from './pages/admin/admin-home/admin-home.componen
 import { AllQuestionsComponent } from './pages/admin/all-questions/all-questions.component';
 import { AllUsersComponent } from './pages/admin/all-users/all-users.component';
 import { TokenInterceptorService } from './services/auth/interceptor/token-interceptor.service';
+import { CanActivateService } from './services/auth/canActivate/can-activate.service';
 
 const router: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent, children: [
-    { path: '', component: LandingPageComponent },
+    { path: '', component: LandingPageComponent},
     { path: 'login', component: LoginComponent },
     { path: 'signup', component: SignupComponent},
-    { path: 'questions', component: QuestionsComponent},
-    { path: 'questions/:id', component: QuestionDetailsComponent},
-    { path: 'users', component: UsersComponent},
-    { path: 'companies', component: CompaniesComponent},
-    { path: 'tags', component: TagsComponent},
-    { path: 'ask-question', component: AskQuestionComponent},
-    { path: 'profile', component: ProfileComponent},
-    { path: 'about', component: AboutComponent},
-    { path: 'contact', component: ContactComponent},
-    { path: 'privacy', component: PrivacyComponent},
+    { path: 'questions', component: QuestionsComponent, canActivate: [CanActivateService]},
+    { path: 'questions/:id', component: QuestionDetailsComponent, canActivate: [CanActivateService]},
+    { path: 'users', component: UsersComponent, canActivate: [CanActivateService]},
+    { path: 'companies', component: CompaniesComponent, canActivate: [CanActivateService]},
+    { path: 'tags', component: TagsComponent, canActivate: [CanActivateService]},
+    { path: 'ask-question', component: AskQuestionComponent, canActivate: [CanActivateService]},
+    { path: 'profile', component: ProfileComponent, canActivate: [CanActivateService]},
+    { path: 'about', component: AboutComponent, canActivate: [CanActivateService]},
+    { path: 'contact', component: ContactComponent, canActivate: [CanActivateService]},
+    { path: 'privacy', component: PrivacyComponent, canActivate: [CanActivateService]},
     { path: '**', component: PageNotFoundComponent}
 
 
@@ -84,9 +85,9 @@ const router: Routes = [
 
 { path: 'admin', component: AdminHomeComponent,
 children : [
-  { path: '', component: AllQuestionsComponent},
-  { path: 'questions', component: AllQuestionsComponent},
-  { path: 'users', component: AllUsersComponent},
+  { path: '', component: AllQuestionsComponent, canActivate: [CanActivateService]},
+  { path: 'questions', component: AllQuestionsComponent, canActivate: [CanActivateService]},
+  { path: 'users', component: AllUsersComponent, canActivate: [CanActivateService]},
   { path: '**', component: PageNotFoundComponent}
 
 ]},

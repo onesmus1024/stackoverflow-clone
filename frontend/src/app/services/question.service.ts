@@ -111,7 +111,8 @@ export class QuestionService {
   constructor(private http: HttpClient) { }
 
   getQuestions():Observable< Question[] > {
-    return this.http.get<Question[]>('http://localhost:4000/api/questions');
+    // include query params in the url of page and pageSize
+    return this.http.get<Question[]>('http://localhost:4000/api/questions/?page=1&pageSize=10');
   }
 
        

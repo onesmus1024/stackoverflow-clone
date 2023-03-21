@@ -25,8 +25,11 @@ export class ProfileComponent {
 
   constructor(private store: Store<AppState>) { }
 
-  // ngOnInit(): void {
-  //   this.store.select(selectLoggedInUser).subscribe 
-  // }
+  ngOnInit(): void {
+    this.store.select(selectLoggedInUser).subscribe((user) => {
+      //
+    }
+    );
+  }
 
 }

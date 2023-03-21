@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { Question } from './interfaces/question.interface';
@@ -10,9 +10,8 @@ import * as QuestionVoteActions from './state/actions/questionVote.actions';
 import * as CommentActions from './state/actions/comment.actions';
 import * as AnswerVoteActions from './state/actions/answerVote.actions';
 import * as AnswerActions from './state/actions/answer.actions';
-
 import { ModalDirective } from './directives/modal.directive';
-import { ModalComponent } from './pages/modal/modal.component';
+import { IsAuthenticatedService } from './services/auth/isAuthenticated/is-authenticated.service';
 
 @Component({
   selector: 'app-root',
@@ -25,12 +24,13 @@ export class AppComponent implements OnInit {
 
   @ViewChild(ModalDirective , {static: true}) modalHost!: ModalDirective;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private isAuthenticated: IsAuthenticatedService) {
 
     
   }
 
   ngOnInit(): void {
+
     this.store.dispatch(UsersActions.loadUsers());
     this.store.dispatch(AnswerVoteActions.loadAnswerVotes());
     this.store.dispatch(TagsActions.loadTags());
@@ -41,6 +41,9 @@ export class AppComponent implements OnInit {
     this.store.dispatch(QuestionVoteActions.loadQuestionVotes());
 
   }
+
+
+
 
   
 }

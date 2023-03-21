@@ -6,13 +6,13 @@ import { Router, RouterModule } from '@angular/router';
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [CommonModule, RouterModule, ModalDirective],  
+  imports: [CommonModule, RouterModule, ModalDirective],
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
 
-  @ViewChild(ModalDirective , {static: true}) modalHost!: ModalDirective;
+  @ViewChild(ModalDirective, { static: true }) modalHost!: ModalDirective;
   @ViewChild('modal') modal!: ModalDirective;
 
   constructor(private router: Router) { }
@@ -22,8 +22,12 @@ export class ModalComponent {
 
 
   close() {
+    const currentUrl = this.router.url;
 
-    this.router.navigate(['/home']);
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    }
+    );
 
   }
 }

@@ -1,6 +1,8 @@
 <nav class="nav-bar">
     <div class="menu-icon">
-        <mat-icon  (click)="toggleSideBar($event)">menu</mat-icon>
+        <mat-icon *ngIf="!isOpenned"  (click)="toggleSideBar($event)">menu</mat-icon>
+        <!-- cross icon -->
+        <mat-icon *ngIf="isOpenned" (click)="toggleSideBar($event)">close</mat-icon>
     </div>
     <a routerLink="/home" class="logo">
         <img src="https://cdn.sstatic.net/Sites/stackoverflow/company/img/logos/so/so-logo.svg?v=4f32ecc8f43d" alt="Stack Overflow">
@@ -19,8 +21,23 @@
     </div>
 
     <div class="links">
-        <a routerLink="login" class="login">Login</a>
-        <a routerLink="signup" class="signup">Sign Up</a>
+
+        <a routerLink="login" *ngIf="!isAuthourized" class="login">Login</a>
+        <a routerLink="signup" class="signup" *ngIf="!isAuthourized">Sign Up</a>
+        <!-- profile -->
+        <a routerLink="/home/profile" class="profile" *ngIf="isAuthourized">
+            <mat-icon>person</mat-icon>
+        </a>
+    
+        <a routerLink="email-notification" class="email-notification" *ngIf="isAuthourized">
+            <mat-icon>email</mat-icon>
+        </a>
+        <!-- logout -->
+        <a routerLink="logout" class="logout" *ngIf="isAuthourized" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </a>
+
+
     </div>
     
 </nav>

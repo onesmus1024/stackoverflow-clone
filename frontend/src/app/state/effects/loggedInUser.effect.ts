@@ -1,5 +1,5 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { map, mergeMap, catchError } from "rxjs/operators";
+import { map, mergeMap, catchError, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 
 import { LoginService } from "src/app/services/auth/login/login.service";
@@ -17,7 +17,12 @@ export class LoggedInUserEffects {
         this.actions$.pipe(
         ofType(loginActions.login),
         mergeMap((action) =>
-            this.loginService.login().pipe(
+            this.loginService.login(action.user).pipe(
+                tap((user) => {
+                    console.log("from service",user);
+                    localStorage.setItem("token", user.token);
+                   
+                }),
             map((user) => loginActions.loginSuccess({ user })),
             catchError(async (error) => loginActions.loginError({ error }))
             )
