@@ -12,6 +12,7 @@ import * as QuestionsActions from '../../state/actions/questions.actions';
 import { selectQuestionVotes } from 'src/app/state/selectors/questionVote.selector';
 import { selectLoggedInUser } from 'src/app/state/selectors/loggedInUser.selector';
 import { User } from 'src/app/interfaces/user.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-questions',
@@ -21,6 +22,8 @@ import { User } from 'src/app/interfaces/user.interface';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
+
+  questionSub = new Subscription();
 
   questions: Question[ ] = [];
   currentPage = 1;
@@ -41,19 +44,6 @@ export class QuestionsComponent implements OnInit {
     this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: 10}));
     this.store.select( selectQuestions).subscribe(questions => {
       this.questions =questions as Question[];
-
-      // add votes to questions
-      this.store.select( selectQuestionVotes).subscribe(votes => {
-        this.questions.forEach(question => {
-          // question.votes = votes.filter(vote => vote.question_id == question.id);
-
-          console.log(votes);
-          
-        });
-      }
-      );
-
-      
     });
 
 

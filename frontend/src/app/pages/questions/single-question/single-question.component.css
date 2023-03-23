@@ -20,6 +20,10 @@
     grid-area: votes;
 
 }
+
+#posted{
+    color: #c4c8cb;
+}
 .answers{
     grid-area: answers;
     color: #c4c8cb;

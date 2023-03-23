@@ -4,6 +4,7 @@ import { Question } from '../interfaces/question.interface';
 import { HttpClient } from '@angular/common/http'
 import { QuestionVote } from '../interfaces/questionVote.interface';
 import { Comment } from '../interfaces/comment.interface';
+import { AnswerVote } from '../interfaces/answerVote.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +27,13 @@ export class QuestionService {
     return this.http.post<Question>(' http://localhost:4000/api/questions', question);
   }
 
-  voteQuestion(question:Question,vote:number): Observable<QuestionVote> {
-    return this.http.post<QuestionVote>('http://localhost:4000/api/questionVotes', { question_id: question.id, vote: vote });
+  voteQuestion(vote:QuestionVote): Observable<QuestionVote> {
+    return this.http.post<QuestionVote>('http://localhost:4000/api/questionVotes', {
+
+    "question_id": vote.question_id,
+    "vote": vote.vote,
+  
+  });
   }
 
 
@@ -39,6 +45,18 @@ export class QuestionService {
     return this.http.post<Comment>('http://localhost:4000/api/comments', comment);
   }
 
+  increaseViewCount(question:Question): Observable<Question> {
+    return this.http.put<Question>(`http://localhost:4000/api/questions/${question.id}/views`, {});
+  }
+
+  voteAnswer(vote:AnswerVote): Observable<AnswerVote> {
+    return this.http.post<AnswerVote>('http://localhost:4000/api/answerVotes', {
+
+    "answer_id": vote.answer_id,
+    "vote": vote.vote,
+  
+  });
+  }
 
        
 }

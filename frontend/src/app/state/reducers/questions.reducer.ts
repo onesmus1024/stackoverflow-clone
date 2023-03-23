@@ -151,6 +151,88 @@ export const questionsReducer = createReducer(
     ),
 
 
+    on(QuestionsActions.addQuestionVote, (state, {questionVote}) => {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.addQuestionVoteSuccess, (state, {questionVote}) => {
+        return {
+            ...state,
+            loading: false,
+            questions: state.questions.map((q: Question) => {
+                if (q.id === questionVote.question_id) {
+                    return {
+                        ...q,
+                        votes: [...q.votes, questionVote]
+                    }
+                }
+                return q;
+            })
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.addQuestionVoteFailure, (state, {error}) => {
+        return {
+            ...state,
+            loading: false,
+            error
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.addAnswerVote, (state, {answerVote}) => {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.addAnswerVoteSuccess, (state, {answerVote}) => {
+
+        return {
+            ...state,
+            loading: false,
+            questions: state.questions.map((q: Question) => {
+                q.answers.map((a: Answer) => {
+                    if (a.id === answerVote.answer_id) {
+                        return {
+                            ...a,
+                            votes: [...a.votes, answerVote]
+                        }
+                    }
+                    return a;
+                }
+                )
+                return q;
+            })
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.addAnswerVoteFailure, (state, {error}) => {
+        return {
+            ...state,
+            loading: false,
+            error
+        }
+    }
+
+    ),
+
+    
+
+
   
 
  
