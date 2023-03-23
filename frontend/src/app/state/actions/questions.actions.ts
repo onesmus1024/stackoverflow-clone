@@ -1,5 +1,6 @@
 import { createAction, props } from "@ngrx/store";
 import { Answer } from "src/app/interfaces/answer.interface";
+import { Comment } from "src/app/interfaces/comment.interface";
 
 import { Question } from "src/app/interfaces/question.interface";
 import { QuestionVote } from "src/app/interfaces/questionVote.interface";
@@ -82,6 +83,22 @@ export const addAnswerSuccess = createAction(
 
 export const addAnswerFailure = createAction(
     '[Questions] Add Answer Failure',
+    (error: any) => ({ error })
+);
+
+
+export const addComment = createAction(
+    '[Questions] Add Comment',
+    (comment:Comment) => ({ comment })
+);
+
+export const addCommentSuccess = createAction(
+    '[Questions] Add Comment Success',
+    (comment:Comment) => ({ comment })
+);
+
+export const addCommentFailure = createAction(
+    '[Questions] Add Comment Failure',
     (error: any) => ({ error })
 );
 

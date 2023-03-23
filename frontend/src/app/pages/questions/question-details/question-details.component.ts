@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from 'src/app/app.state';
 import { Question } from 'src/app/interfaces/question.interface';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { Answer } from 'src/app/interfaces/answer.interface';
 import { QuestionVote } from 'src/app/interfaces/questionVote.interface';
 import { AnswerVote } from 'src/app/interfaces/answerVote.interface';
 import { Comment } from 'src/app/interfaces/comment.interface';
+
 @Component({
   selector: 'app-question-details',
   standalone: true,
@@ -47,7 +48,7 @@ export class QuestionDetailsComponent implements OnInit {
 
   answerForm:FormGroup
   commentForm:FormGroup
-  constructor(private store: Store<AppState>, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private fb: FormBuilder, private router: Router) {
 
 
     this.answerForm = this.fb.group({
@@ -64,7 +65,7 @@ export class QuestionDetailsComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
+    this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: 10}));
     this.route.params.subscribe(params => {
       this.store.select(selectQuestions).subscribe(questions => {
         this.question = questions.find((question: Question) => question.id === params['id']) as Question ;
@@ -115,9 +116,12 @@ export class QuestionDetailsComponent implements OnInit {
       question_id : this.question.id
     }
 
-    
+    this.store.dispatch(QuestionsActions.addAnswer(answer))
 
-    console.log(answer)
+
+    this.router.navigate(['/home/questions'])
+
+    
 
   }
 
@@ -136,21 +140,23 @@ export class QuestionDetailsComponent implements OnInit {
   postComment(answer:Answer){
     let comment: Comment = {
       id: ' ',
-      comment: ' ',
-      created_at: this.commentForm.value.comment,
+      comment:  this.commentForm.value.comment,
+      created_at: ' ',
       updated_at: ' ',
-      answer_id: ' '
+      answer_id: answer.id,
+      is_deleted:'0'
 
     }
 
     // check if form is valid
-    if(!this.commentForm.invalid){
-      return
-    }
+    // if(!this.commentForm.invalid){
+    //   return
+    // }
 
 
 
     console.log(comment)
 
+    this.store.dispatch(QuestionsActions.addComment(comment))
   }
 }

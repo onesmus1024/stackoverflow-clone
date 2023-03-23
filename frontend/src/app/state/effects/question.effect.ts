@@ -31,6 +31,23 @@ export class QuestionEffects {
         )),
     ));
 
+    addAnswer$ = createEffect(() => this.actions$.pipe(
+        ofType(QuestionsActions.addAnswer),
+        mergeMap((action) => this.questionService.addAnswer(action.answer).pipe(
+            map(answer => QuestionsActions.addAnswerSuccess(answer )),
+            catchError(error => of(QuestionsActions.addAnswerFailure({ error })))
+        )),
+    ));
+
+    addComment$ = createEffect(() => this.actions$.pipe(
+        ofType(QuestionsActions.addComment),
+        mergeMap((action) => this.questionService.addComment(action.comment).pipe(
+            map(comment => QuestionsActions.addCommentSuccess(comment )),
+            catchError(error => of(QuestionsActions.addCommentFailure({ error })))
+        )),
+    ));
+    
+
    
     
 

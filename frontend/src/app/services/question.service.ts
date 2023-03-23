@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Question } from '../interfaces/question.interface';
 import { HttpClient } from '@angular/common/http'
 import { QuestionVote } from '../interfaces/questionVote.interface';
+import { Comment } from '../interfaces/comment.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class QuestionService {
 
   addAnswer(answer: any): Observable<any> {
     return this.http.post<any>('http://localhost:4000/api/answers', answer);
+  }
+
+  addComment(comment:Comment): Observable<Comment> {
+    return this.http.post<Comment>('http://localhost:4000/api/comments', comment);
   }
 
 

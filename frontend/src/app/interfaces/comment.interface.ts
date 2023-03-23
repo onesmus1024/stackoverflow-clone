@@ -8,4 +8,5 @@ export interface Comment {
     updated_at: string;
     user?: User;
     answer_id: string;
+    is_deleted?: string;
 }

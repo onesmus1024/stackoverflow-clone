@@ -74,7 +74,7 @@
             <div class="post-your-comment">
                 <p>Post Your Comment</p>
                 <form (ngSubmit)="postComment(answer)" [formGroup]="commentForm">
-                    <textarea name="comment" id="comment" cols="20" rows="5"></textarea>
+                    <textarea name="comment" id="comment" cols="20" rows="5" formControlName="comment"></textarea>
                     <button type="submit">Post Your Comment</button>
                 </form>
             </div>
