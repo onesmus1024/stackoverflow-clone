@@ -245,7 +245,9 @@ export class QuestionDetailsComponent implements OnInit{
   }
 
   deleteAnswer(answer: Answer) {
-    console.log(answer);
+    this.store.dispatch(QuestionsActions.deleteAnswer(answer))
+
+    this.router.navigate(['/home/questions'])
   }
 
   editAnswer(answer: Answer) {
@@ -253,7 +255,7 @@ export class QuestionDetailsComponent implements OnInit{
   }
 
   markAccepted(answer: Answer) {
-    console.log(answer);
+    this.store.dispatch(QuestionsActions.updateAnswer({...answer, is_accepted: '1',is_sent: '0'}))
   }
     
 }

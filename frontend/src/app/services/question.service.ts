@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http'
 import { QuestionVote } from '../interfaces/questionVote.interface';
 import { Comment } from '../interfaces/comment.interface';
 import { AnswerVote } from '../interfaces/answerVote.interface';
+import { Answer } from '../interfaces/answer.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,16 @@ export class QuestionService {
   });
   }
 
+  updateAnswer(answer: Answer): Observable<Answer> {
+    return this.http.put<Answer>(`http://localhost:4000/api/answers/${answer.id}`, answer);
+  }
+
+  deleteAnswer(answer: Answer): Observable<Answer> {
+    return this.http.delete<Answer>(`http://localhost:4000/api/answers/${answer.id}`);
+  }
+
+  deleteQuestion(question: Question): Observable<Question> {
+    return this.http.delete<Question>(`http://localhost:4000/api/questions/${question.id}`);
+  }
        
 }

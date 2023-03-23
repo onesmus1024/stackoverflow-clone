@@ -8,6 +8,7 @@ import { selectLoggedInUser } from 'src/app/state/selectors/loggedInUser.selecto
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Route } from '@angular/router';
+import * as QuestionsActions from 'src/app/state/actions/questions.actions';
 
 
 
@@ -23,7 +24,7 @@ export class SingleQuestionComponent implements OnInit {
   isOwner = true ;
   user!:any
 
-  @Input() question: Question | undefined;
+  @Input() question!: Question;
 
   constructor(private store: Store<AppState>, private router: Router) { }
 
@@ -46,12 +47,14 @@ export class SingleQuestionComponent implements OnInit {
     }
     );
   }
-  deleteQuestion(id : string) {
-    console.log(id);
+  deleteQuestion(iquestion :Question) {
+    this.store.dispatch(QuestionsActions.deleteQuestion({...iquestion,is_deleted:'1'}));
+
+    this.store.dispatch(QuestionsActions.loadQuestions({page:1, pageSize:10}));
   }
 
-  updateQuestion(id : string) {
-    console.log(id);
+  updateQuestion(question :Question) {
+    console.log(question);
   }
 
 

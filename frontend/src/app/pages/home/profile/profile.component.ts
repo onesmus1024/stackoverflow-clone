@@ -5,6 +5,12 @@ import { loggedInUser } from 'src/app/interfaces/loggedInUser.interface';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { selectLoggedInUser } from 'src/app/state/selectors/loggedInUser.selector';
+import { Answer } from 'src/app/interfaces/answer.interface';
+import { Question } from 'src/app/interfaces/question.interface';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { selectQuestions } from 'src/app/state/selectors/question.selector';
+import { selectAnswers } from 'src/app/state/selectors/answer.selector';
 
 @Component({
   selector: 'app-profile',
@@ -14,22 +20,48 @@ import { selectLoggedInUser } from 'src/app/state/selectors/loggedInUser.selecto
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  user: User = {
-    id: ' ',
-    name: 'Onesmus Wambugu ',
-    email: 'onesmus@gmail.com',
-    created_at: '2020-10-10 12:00:00',
-    updated_at: '2020-10-10 12:00:00'
-  }
-  loggedInUser!: loggedInUser 
 
-  constructor(private store: Store<AppState>) { }
+  user!: User;
+  answerThatBelongsToUser!: Answer[]
+  questionThatBelongsToUser!: Question[]
+  loggedInUserSub = new Subscription();
+  constructor(private store: Store<AppState>, private router: Router) { }
 
   ngOnInit(): void {
-    this.store.select(selectLoggedInUser).subscribe((user) => {
-      //
+
+    this.loggedInUserSub = this.store.select(selectLoggedInUser).subscribe(user => {
+      if (user == null) {
+        this.router.navigate(['/home/login']);
+      }
+      else {
+        this.user = user as unknown as User;
+
+
+      }
+    });
+
+    this.store.select(selectQuestions).subscribe(questions => {
+      
+      this.questionThatBelongsToUser = questions.filter(question => question.user_id == this.user.user[0].id) as unknown as Question[];
+
+  
     }
+
     );
+
+    // get answers that belong to user from store
+
+    this.store.select(selectAnswers).subscribe(answers => {
+    
+      this.answerThatBelongsToUser = answers.filter(answer => answer.user_id == this.user.user[0].id) as unknown as Answer[];
+
+   
+    }
+
+    );
+
+
+
   }
 
 }

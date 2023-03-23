@@ -4,10 +4,10 @@
             <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="avatar">
         </div>
         <div class="name">
-            <h1>{{user.name}}</h1>
+            <h1>{{user.user[0].name}}</h1>
         </div>
         <div class="email">
-            <p>{{user.email}}</p>
+            <p>{{user.user[0].email}}</p>
         </div>
     </div>
     <div class="answers">
@@ -17,13 +17,12 @@
         <div class="answer" >
             <div class="total">
                 <p>total</p>
-                <p>2</p>
+                <p>{{answerThatBelongsToUser.length}}</p>
             </div>
             <div class="answers-heading">
                 <p>Answers</p>
                 <ol>
-                    <li>You need to install nodejs first</li>
-                    <li>Then you need to install angular cli</li>
+                    <li *ngFor="let answer of answerThatBelongsToUser">{{answer.answer}}</li>
                 </ol>
             </div>
         </div>
@@ -35,13 +34,12 @@
         <div class="question" >
             <div class="total">
                 <p>total</p>
-                <p>2</p>
+                <p>{{questionThatBelongsToUser.length}}</p>
             </div>
             <div class="questions-heading">
                 <p>Questions</p>
                 <ol>
-                    <li>what is angular?</li>
-                    <li>what is nodejs?</li>
+                    <li *ngFor="let question of questionThatBelongsToUser">{{question.question}}</li>
                 </ol>
             </div>
         </div>

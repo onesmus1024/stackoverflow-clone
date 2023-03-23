@@ -76,6 +76,24 @@ export const questionsReducer = createReducer(
 
     ),
 
+    on(QuestionsActions.deleteQuestionSuccess, (state, { question }) => {
+        return {
+            ...state,
+            questions: state.questions.filter((q: Question) => q.id !== question.id)
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.deleteQuestionFailure, (state, { error }) => {
+        return {
+            ...state,
+            error
+        }
+    }
+
+    ),
+
     on(QuestionsActions.addAnswer, (state, {answer}) => {
         return {
             ...state,
@@ -229,6 +247,82 @@ export const questionsReducer = createReducer(
     }
 
     ),
+
+    on(QuestionsActions.updateAnswer, (state, {answer}) => {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.updateAnswerSuccess, (state, {answer}) => {
+        return {
+            ...state,
+            loading: false,
+            questions: state.questions.map((q: Question) => {
+                q.answers.map((a: Answer) => {
+                    if (a.id === answer.id) {
+                        return {
+                            ...a,
+                            answer: answer.answer
+                        }
+                    }
+                    return a;
+                }
+                )
+                return q;
+            })
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.updateAnswerFailure, (state, {error}) => {
+        return {
+            ...state,
+            loading: false,
+            error
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.deleteAnswer, (state, {answer}) => {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.deleteAnswerSuccess, (state, {answer}) => {
+        return {
+            ...state,
+            loading: false,
+            questions: state.questions.map((q: Question) => {
+                q.answers.filter((a: Answer) => a.id !== answer.id
+
+                )
+                return q;
+            })
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.deleteAnswerFailure, (state, {error}) => {
+        return {
+            ...state,
+            loading: false,
+            error
+        }
+    }
+
+    ),
+
 
     
 

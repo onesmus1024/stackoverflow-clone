@@ -63,6 +63,33 @@ export class QuestionEffects {
         )),
     ));
 
+    updateAnswer$ = createEffect(() => this.actions$.pipe(
+        ofType(QuestionsActions.updateAnswer),
+        mergeMap((action) => this.questionService.updateAnswer(action.answer).pipe(
+            map(answer => QuestionsActions.updateAnswerSuccess(answer )),
+            catchError(error => of(QuestionsActions.updateAnswerFailure({ error })))
+        )),
+    ));
+
+    deleteAnswer$ = createEffect(() => this.actions$.pipe(
+        ofType(QuestionsActions.deleteAnswer),
+        mergeMap((action) => this.questionService.deleteAnswer(action.answer).pipe(
+            map(answer => QuestionsActions.deleteAnswerSuccess(answer )),
+            catchError(error => of(QuestionsActions.deleteAnswerFailure({ error })))
+        )),
+    ));
+
+    deleteQuestion$ = createEffect(() => this.actions$.pipe(
+        ofType(QuestionsActions.deleteQuestion),
+        mergeMap((action) => this.questionService.deleteQuestion(action.question).pipe(
+            map(question => QuestionsActions.deleteQuestionSuccess(question )),
+            catchError(error => of(QuestionsActions.deleteQuestionFailure({ error })))
+        )),
+    ));
+
+
+
+
    
     
 

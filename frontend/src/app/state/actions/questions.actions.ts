@@ -137,6 +137,39 @@ export const addAnswerVoteFailure = createAction(
 );
 
 
+export const updateAnswer = createAction(
+    '[Questions] Update Answer',
+    (answer: Answer) => ({ answer })
+);
+
+export const updateAnswerSuccess = createAction(
+    '[Questions] Update Answer Success',
+    (answer: Answer) => ({ answer })
+);
+
+export const updateAnswerFailure = createAction(
+    '[Questions] Update Answer Failure',
+    (error: any) => ({ error })
+);
+
+export const deleteAnswer = createAction(
+    '[Questions] Delete Answer',
+    (answer: Answer) => ({ answer })
+);
+
+export const deleteAnswerSuccess = createAction(
+    '[Questions] Delete Answer Success',
+    (answer: Answer) => ({ answer })
+);
+
+export const deleteAnswerFailure = createAction(
+    '[Questions] Delete Answer Failure',
+    (error: any) => ({ error })
+);
+
+
+
+
 
 
 

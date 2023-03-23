@@ -3,6 +3,8 @@ import { Answer } from './answer.interface';
 import { Tag } from './tag.interface';
 import { QuestionVote } from './questionVote.interface';
 export interface Question {
+    is_deleted?: string;
+    user_id?: string;
     id: string;
     question: string;
     description: string;

@@ -4,26 +4,26 @@
       
     </div>
     <div class="votes">
-        <p>{{question?.votes?.length}} votes</p>
+        <p>{{question.votes.length}} votes</p>
     </div>
     <div class="answers">
-        <p>{{question?.answers?.length}} answers</p>
+        <p>{{question.answers.length}} answers</p>
     </div>
     <div class="views">
-        <p>{{question?.views}} views</p>
+        <p>{{question.views}} views</p>
     </div>
     <div class="question">
-        <a routerLink="{{question?.id}}"><P>{{question?.question}}</P></a>
+        <a routerLink="{{question.id}}"><P>{{question.question}}</P></a>
     </div>
     <div class="tags">
         <p>{{question!.tags[0].tag}}</p>
     </div>
     <div class="user">
-        <p><span id="posted">posted by </span>{{question?.user?.name}}</p>
+        <p><span id="posted">posted by </span>{{question.user.name}}</p>
     </div>
     <!-- add button to delete, update  if I am the owner -->
     <div class="actions">
-        <button *ngIf="question?.user?.id === user?.id" (click)="deleteQuestion(question!.id)">Delete</button>
-        <button *ngIf="question?.user?.id === user?.id" (click)="updateQuestion(question!.id)">Update</button>
+        <button *ngIf="question?.user?.id === user?.id" (click)="deleteQuestion(question)">Delete</button>
+        <button *ngIf="question?.user?.id === user?.id" (click)="updateQuestion(question)">Update</button>
     </div>
 </div>
