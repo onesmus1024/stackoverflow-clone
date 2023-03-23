@@ -21,4 +21,9 @@
     <div class="user">
         <p>{{question?.user?.name}}</p>
     </div>
+    <!-- add button to delete, update  if I am the owner -->
+    <div class="actions">
+        <button *ngIf="question?.user?.id === user?.id" (click)="deleteQuestion(question!.id)">Delete</button>
+        <button *ngIf="question?.user?.id === user?.id" (click)="updateQuestion(question!.id)">Update</button>
+    </div>
 </div>

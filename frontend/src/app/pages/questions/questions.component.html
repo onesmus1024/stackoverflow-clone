@@ -1,9 +1,17 @@
-
 <div class="questions">
     <div class="header">
         <p>Top Questions</p>
         <button routerLink="/home/ask-question">Ask Question</button>
     </div>
+    <h3>test</h3>
 
     <app-single-question *ngFor="let question of questions" [question]="question"></app-single-question>
+
+
+    <div class="pagination">
+        <button  (click)="onPageChange(currentPage - 1)">Previous</button>
+
+        <button *ngFor="let page of pages" (click)="onPageChange(page)" [class.active]="page === currentPage">{{page}}</button>
+        <button  (click)="onPageChange(currentPage + 1)">Next</button>
+    </div>
 </div>

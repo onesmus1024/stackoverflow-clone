@@ -46,45 +46,77 @@ export const questionsReducer = createReducer(
     on(QuestionsActions.addQuestion, (state, { question }) => {
         return {
             ...state,
+            loading: true
+        }
+    }
+    ),
+
+    on(QuestionsActions.addQuestionSuccess, (state, { question }) => {
+        return {
+            ...state,
             questions: [...state.questions, question]
         }
     }
     ),
+
+    on(QuestionsActions.addQuestionFailure, (state, { error }) => {
+        return {
+            ...state,
+            error
+        }
+    }
+    ),
+    on(QuestionsActions.deleteQuestion, (state, { question }) => {
+        return {
+            ...state,
+            questions: state.questions.filter((q: Question) => q.id !== question.id)
+        }
+    }
+
+    ),
+
+    on(QuestionsActions.addAnswer, (state, {answer}) => {
+        return {
+            ...state,
+            loading: true
+        }
+    }
+    ),
+
+    on(QuestionsActions.addAnswerSuccess, (state, {answer}) => {
+        return {
+            ...state,
+            loading: false,
+            questions: state.questions.map((q: Question) => {
+                if (q.id === answer.question_id) {
+                    return {
+                        ...q,
+                        answers: [...q.answers, answer]
+                    }
+                }
+                return q;
+            })
+        }
+    }
+    ),
+
+    on(QuestionsActions.addAnswerFailure, (state, {error}) => {
+        return {
+            ...state,
+            loading: false,
+            error
+        }
+    }
+    ),
+
+
+  
+
+ 
+
+
+
     
 
 );
-
-
-
-
-
-// on(QuestionsActions.upvoteQuestion, (state, { question }) => {
-//     return {
-//         ...state,
-//         questions: state.questions.map((q: Question) => {
-//             if (q.id === question.id) {
-            
-//                 const vote = q.votes.find((vote: QuestionVote) => vote.user.id === user.id);
-//                 console.log("user vote",vote?.user.id);
-//                 console.log("user id",user.id);
-//                 if (vote) {
-//                     console.log(vote);
-//                     vote.vote = vote.vote === 0 ? 1 : 0;
-//                 } else {
-//                     q.votes = [...q.votes,{
-//                         id: '1',
-//                         vote: 1,
-//                         created_at: '2020-10-10 10:10:10',
-//                         updated_at: '2020-10-10 10:10:10',
-//                         user: user,
-//                         question_id: question.id
-//                     }];
-//                 }
-//             }
-//             return q;
-//         }
-//         )
-//     }
-// }
-// )
 

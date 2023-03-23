@@ -16,14 +16,13 @@
 .ask-question .form-group{
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    width: 100%;
     margin: auto;
 }
 
@@ -34,6 +33,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    border: none;
 }
 
 .ask-question .form-group form .input-group{
@@ -89,4 +89,33 @@
 
 #code, #description{
     width: 100%;
+}
+
+
+h1{
+    margin-bottom: 20px;
+    color: #0c81db;
+}
+
+
+ul li{
+    margin-bottom: 10px;
+
+}
+
+.error{
+    color: red;
+}
+
+select{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+textarea{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }

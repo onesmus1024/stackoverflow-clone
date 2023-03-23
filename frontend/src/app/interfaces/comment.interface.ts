@@ -6,6 +6,6 @@ export interface Comment {
     comment: string;
     created_at: string;
     updated_at: string;
-    user: User;
+    user?: User;
     answer_id: string;
 }

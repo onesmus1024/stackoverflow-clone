@@ -8,8 +8,9 @@ export interface Answer {
     answer: string;
     created_at: string; 
     updated_at: string;
-    user: User;
+    user?: User;
     votes: AnswerVote[];
     code : string;
     comments : Comment[];
+    question_id: string;
 }

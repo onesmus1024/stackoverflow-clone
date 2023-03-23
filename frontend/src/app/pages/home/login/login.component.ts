@@ -96,12 +96,17 @@ export class LoginComponent implements OnInit {
     this.store.select(selectLoggedInUser).subscribe((user: any) => {
       if (user) {
         if (user.user[0].is_admin) {
-          this.isAuthenticated.isAuthenticated()
           this.router.navigate(['/admin']);
         }
         else {
-          this.isAuthenticated.isAuthenticated()
-          this.router.navigate(['/']);
+          // reload page and redirect to home
+          const currentUrl = this.router.url;
+
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(["/"]);
+          }
+          );
+
         }
       }
 

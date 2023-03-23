@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Question } from '../interfaces/question.interface';
 import { HttpClient } from '@angular/common/http'
+import { QuestionVote } from '../interfaces/questionVote.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -10,110 +11,29 @@ export class QuestionService {
 
 
 
-  questions: Question[] = [
-    {
-      id: '1',
-      question: 'How to create a service in Angular?',
-      description: 'I am trying to create a service in Angular but I am getting an error.',
-      code: 'import { Injectable } from \'@angular/core\';',
-      created_at: '2020-10-10 10:10:10',
-      updated_at: '2020-10-10 10:10:10',
-      views: 10,
-      user: {
-        id: '1',
-        name: 'John Doe',
-        email: '',
-        created_at: '2020-10-10 10:10:10',
-        updated_at: '2020-10-10 10:10:10'
-      },
-      answers: [
-        {
-          id: '1',
-          user_id: '1',
-          answer: 'You need to import the Injectable decorator.',
-          created_at: '2020-10-10 10:10:10',
-          updated_at: '2020-10-10 10:10:10',
-          code: 'import { Injectable } from \'@angular/core\';',
-          user: {
-            id: '1',
-            name: 'John Doe',
-            email: '',
-            created_at: '2020-10-10 10:10:10',
-            updated_at: '2020-10-10 10:10:10'
-          },
-          votes: [
-            {
-              id: '1',
-              vote: 1,
-              created_at: '2020-10-10 10:10:10',
-              answer_id: '1',
-              updated_at: '2020-10-10 10:10:10',
-              user: {
-                id: '1',
-                name: 'John Doe',
-                email: '',
-                created_at: '2020-10-10 10:10:10',
-                updated_at: '2020-10-10 10:10:10'
-              },
-              user_id: '1'
-            }
-          ],
-          comments: [
-            {
-              id: '1',
-              comment: 'Thanks, it worked!',
-              created_at: '2020-10-10 10:10:10',
-              updated_at: '2020-10-10 10:10:10',
-              user: {
-                id: '1',
-                name: 'John Doe',
-                email: '',
-                created_at: '2020-10-10 10:10:10',
-                updated_at : '2020-10-10 10:10:10'
-              },
-              answer_id: '1'
-
-            }
-          ]
-
-        }
-      ],
-      tags: [
-        {
-          id: '1',
-          tag: 'Angular',
-          description: 'Angular is a TypeScript-based open-source web application framework led by the Angular Team at Google and by a community of individuals and corporations.',
-          created_at: '2020-10-10 10:10:10',
-          updated_at: '2020-10-10 10:10:10'
-        }
-      ],
-      votes: [
-        {
-          id: '1',
-          vote: 1,
-          created_at: '2020-10-10 10:10:10',
-          updated_at: '2020-10-10 10:10:10',
-          user: {
-            id: '1',
-            name: 'John Doe',
-            email: '',
-            created_at: '2020-10-10 10:10:10',
-            updated_at: '2020-10-10 10:10:10'
-          },
-          question_id: '1',
-
-        }
-      ]
-    }
-      
-  ];
+  
 
   constructor(private http: HttpClient) { }
 
-  getQuestions():Observable< Question[] > {
+  getQuestions(page = 1, pageSize = 1): Observable<Question[]> {
     // include query params in the url of page and pageSize
-    return this.http.get<Question[]>('http://localhost:4000/api/questions/?page=1&pageSize=10');
+    return this.http.get<Question[]>('http://localhost:4000/api/questions/', { params: { page: page.toString(), pageSize: pageSize.toString() } });
   }
+
+
+  addQuestion(question: Question): Observable<Question> {
+    return this.http.post<Question>(' http://localhost:4000/api/questions', question);
+  }
+
+  voteQuestion(question:Question,vote:number): Observable<QuestionVote> {
+    return this.http.post<QuestionVote>('http://localhost:4000/api/questionVotes', { question_id: question.id, vote: vote });
+  }
+
+
+  addAnswer(answer: any): Observable<any> {
+    return this.http.post<any>('http://localhost:4000/api/answers', answer);
+  }
+
 
        
 }

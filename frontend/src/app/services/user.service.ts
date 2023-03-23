@@ -13,5 +13,13 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:4000/api/users');
   }
 
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post('http://localhost:4000/api/password/forgot-password', { email });
+  }
+
+  resetPassword(password: string, token: string,id: string): Observable<any> {
+    return this.http.post(`http://localhost:4000/api/password/reset-password/${id}/${token}`, { password });
+  }
+
   
 }

@@ -19,7 +19,6 @@ export class LoggedInUserEffects {
         mergeMap((action) =>
             this.loginService.login(action.user).pipe(
                 tap((user) => {
-                    console.log("from service",user);
                     localStorage.setItem("token", user.token);
                    
                 }),

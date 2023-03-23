@@ -21,7 +21,6 @@ export class CompaniesComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('companies').subscribe(({ companies, loading, error }) => {
       this.companies = companies;
-      console.log(this.companies);
     });
   }
   

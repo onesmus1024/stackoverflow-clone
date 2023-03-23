@@ -37,7 +37,6 @@ import { AnswerEffects } from './state/effects/answer.effect';
 
 
 
-
 import { HomePageComponent } from './pages/home/home-page/home-page.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoginComponent } from './pages/home/login/login.component';
@@ -59,7 +58,8 @@ import { AllQuestionsComponent } from './pages/admin/all-questions/all-questions
 import { AllUsersComponent } from './pages/admin/all-users/all-users.component';
 import { TokenInterceptorService } from './services/auth/interceptor/token-interceptor.service';
 import { CanActivateService } from './services/auth/canActivate/can-activate.service';
-
+import { ForgotPasswordComponent } from './pages/home/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './pages/home/reset-password/reset-password.component';
 const router: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent, children: [
@@ -76,6 +76,8 @@ const router: Routes = [
     { path: 'about', component: AboutComponent, canActivate: [CanActivateService]},
     { path: 'contact', component: ContactComponent, canActivate: [CanActivateService]},
     { path: 'privacy', component: PrivacyComponent, canActivate: [CanActivateService]},
+    { path: 'forgot-password', component: ForgotPasswordComponent},
+    { path: 'reset-password/:id/:token', component: ResetPasswordComponent},
     { path: '**', component: PageNotFoundComponent}
 
 

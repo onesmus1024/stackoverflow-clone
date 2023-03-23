@@ -9,6 +9,11 @@
     border: 1px solid #ccc;
     max-width: 500px;
     margin-bottom: 20px;
+    height: 300px;
+    max-width: 500px;
+    margin-bottom: 20px;
+    height: 300px;
+    
 }
 
 .single-user  .profile-image{
@@ -34,4 +39,6 @@
     font-size: 14px;
     font-weight: 400;
     color: #777;
+    width: 50%;
+
 }

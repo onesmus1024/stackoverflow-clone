@@ -2,67 +2,78 @@
 
     <div class="header">
         <div class="question-time">
-            <!-- <p>{{question.question}}</p> -->
-            <!-- <p class="date-posted">posted {{question.created_at| date}} </p> -->
+            <p>{{question!.question}}</p>
+            <p class="date-posted">posted {{question!.created_at| date}} </p>
         </div>
         <button routerLink="/home/ask-question">Ask Question</button>
     </div>
 
     <div class="details">
         <div class="votes">
-            <img class="icon" src="../../../assets/caret-up-outline.svg" alt="arrow up" (click)="upVote(question)">
-            <!-- <p>{{question.votes.length}}</p> -->
-            <img class="icon" src="../../../assets/caret-down-outline.svg" alt="arrow down">
+            <img class="icon vote-btn" src="../../../assets/caret-up-outline.svg" alt="arrow up" (click)="vote(question,1)">
+            <p>{{votesSum}}</p>
+            
+            <img class="icon vote-btn" src="../../../assets/caret-down-outline.svg" alt="arrow down" (click)="vote(question,-1)">
         </div>
 
         <div class="description">
-            <!-- <p>{{question.description}}</p> -->
+            <p>{{question!.description}}</p>
         </div>
 
         <div class="tags">
-            <!-- <p>{{question!.tags[0].tag}}</p> -->
+            <p>{{question!.tags[0]!.tag}}</p>
         </div>
         <div class="code">
-            <pre>
-                <code>
-                    <!-- {{question.code}} -->
+            
+                <code style="background-color: #f5f5f5; padding: 10px; border-radius: 5px;">
+                    {{question!.code}}
                 </code>
-            </pre>
+            
         </div>
 
         <div class="post-your-answer">
             
-            <form>
+            <form (ngSubmit)="postAnswer(question)" [formGroup]="answerForm">
                 <p>Post Your Answer</p>
-                <editor name="answer" id="answer" ></editor>
+                <textarea name="answer" id="answer" formControlName="answer"></textarea>
                 <p>Post Your Code</p>
-                <editor name="code" id="code" ></editor>
+                <textarea name="code" id="code" formControlName="code"></textarea>
                 <button type="submit">Post Your Answer</button>
             </form>
         </div>
     </div>
 
-    <div class="answers">
+    <div class="answers" *ngIf="question?.answers!.length > 0">
         <p>Answers</p>
         <div class="answer" *ngFor="let answer of question?.answers">
             <div class="votes">
-                <img class="icon" src="../../../assets/caret-up-outline.svg" alt="arrow up">
-                <p>{{answer?.votes?.length}}</p>
-                <img class="icon" src="../../../assets/caret-down-outline.svg" alt="arrow down">
+                <img class="icon vote-btn" src="../../../assets/caret-up-outline.svg" alt="arrow up" (click)="voteAnswer(answer,1)">
+                <p>{{answerVotesSum}}</p>
+                <img class="icon vote-btn" src="../../../assets/caret-down-outline.svg" alt="arrow down" (click)="voteAnswer(answer,-1)">
             </div>
             <div class="answer-description">
-                <!-- <p>{{answer?.answer}}</p> -->
+                <p>{{answer?.answer}}</p>
             </div>
             <div class="code">
-                <pre>
-                    <code>
-                        <!-- {{answer?.code}} -->
+                
+                    <code style="background-color: #f5f5f5; padding: 10px; border-radius: 5px;">
+                        {{answer?.code}}
                     </code>
-                </pre>
+                   
+        
+            </div>
+            <div class="comment" *ngIf="answer?.comments!.length > 0">
+                <p>Comments</p>
+                <div class="comment" *ngFor="let comment of answer?.comments">
+               
+                    <div class="comment-description">
+                        <p>{{comment?.comment}}</p>
+                    </div>
+                </div>
             </div>
             <div class="post-your-comment">
                 <p>Post Your Comment</p>
-                <form>
+                <form (ngSubmit)="postComment(answer)" [formGroup]="commentForm">
                     <textarea name="comment" id="comment" cols="20" rows="5"></textarea>
                     <button type="submit">Post Your Comment</button>
                 </form>

@@ -6,6 +6,12 @@ import { Question } from 'src/app/interfaces/question.interface';
 import { SingleQuestionComponent } from './single-question/single-question.component';
 import { RouterModule } from '@angular/router';
 import { selectQuestions } from 'src/app/state/selectors/question.selector';
+import { QuestionService } from 'src/app/services/question.service';
+import { Router } from '@angular/router';
+import * as QuestionsActions from '../../state/actions/questions.actions';
+import { selectQuestionVotes } from 'src/app/state/selectors/questionVote.selector';
+import { selectLoggedInUser } from 'src/app/state/selectors/loggedInUser.selector';
+import { User } from 'src/app/interfaces/user.interface';
 
 @Component({
   selector: 'app-questions',
@@ -17,18 +23,53 @@ import { selectQuestions } from 'src/app/state/selectors/question.selector';
 export class QuestionsComponent implements OnInit {
 
   questions: Question[ ] = [];
+  currentPage = 1;
+  pageSize = 1;
+  pages = [1,2,3,4,5,];
 
-  constructor(private store: Store<AppState>) { 
+  user!: User;
+
+
+
+
+
+  constructor(private store: Store<AppState>, private questionService: QuestionService, private router: Router) {
     
   }
 
   ngOnInit(): void {
     this.store.select( selectQuestions).subscribe(questions => {
       this.questions =questions as Question[];
-      console.log(this.questions as Question[]);
-      
+
+      // add votes to questions
+      this.store.select( selectQuestionVotes).subscribe(votes => {
+        this.questions.forEach(question => {
+          // question.votes = votes.filter(vote => vote.question_id == question.id);
+
+          console.log(votes);
+          
+        });
+      }
+      );
+
       
     });
+
+
+    this.store.select( selectLoggedInUser).subscribe(user => {
+      if(user == null)
+      {
+        this.router.navigate(['/home/login']);
+      }
+    }
+    );
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: page}));
+
+
   }
 
 

@@ -184,6 +184,11 @@ code{
     width: 200px;
 }
 
+.vote-btn:hover{
+    border: 1px solid #92b3cb;
+    cursor: pointer;
+}
+
 
 
 

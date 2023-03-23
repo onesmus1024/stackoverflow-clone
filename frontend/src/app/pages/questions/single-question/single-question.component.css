@@ -58,6 +58,29 @@
     grid-area: space;
 }
 
+.actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.actions button{
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background: #0a95ff;
+    color: white;
+}
+
+.actions button:hover{
+    cursor: pointer;
+}
+
+
+
 
 /* tablet */
 
@@ -97,3 +120,4 @@
 
     
 }
+

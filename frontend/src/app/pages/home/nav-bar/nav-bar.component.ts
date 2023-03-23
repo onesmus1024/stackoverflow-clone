@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, DoCheck, ElementRef, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
@@ -14,7 +14,8 @@ import { CanActivateService } from 'src/app/services/auth/canActivate/can-activa
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class NavBarComponent implements OnInit ,OnChanges{
+// add ngDoCheck() to the class
+export class NavBarComponent implements OnInit ,OnChanges,DoCheck {
 
   @ViewChild('sideBar') sideBar: ElementRef | undefined;
   isAuthourized: boolean = false;
@@ -38,11 +39,14 @@ export class NavBarComponent implements OnInit ,OnChanges{
   ngOnChanges(): void {
     this.isAuthourized = this.isAuthenticated.isAuthenticated();
   }
+
+  ngDoCheck(): void {
+    this.isAuthourized = this.isAuthenticated.isAuthenticated();
+  }
  
   logout() {
     localStorage.removeItem('token');
     this.isAuthourized = false;
-
     this.router.navigate(['/']);
     
 

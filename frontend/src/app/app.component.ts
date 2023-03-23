@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, ViewChild } from '@angular/core';
+import { Component, DoCheck, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from './app.state';
 import { Question } from './interfaces/question.interface';
@@ -31,16 +31,35 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.store.dispatch(UsersActions.loadUsers());
-    this.store.dispatch(AnswerVoteActions.loadAnswerVotes());
-    this.store.dispatch(TagsActions.loadTags());
-    this.store.dispatch(CompaniesActions.loadCompanies());
-    this.store.dispatch(CommentActions.loadComments());
-    this.store.dispatch(AnswerActions.loadAnswers());
-    this.store.dispatch(QuestionsActions.loadQuestions());
-    this.store.dispatch(QuestionVoteActions.loadQuestionVotes());
+   
+
+      this.store.dispatch(UsersActions.loadUsers());
+      this.store.dispatch(AnswerVoteActions.loadAnswerVotes());
+      this.store.dispatch(TagsActions.loadTags());
+      this.store.dispatch(CompaniesActions.loadCompanies());
+      this.store.dispatch(CommentActions.loadComments());
+      this.store.dispatch(AnswerActions.loadAnswers());
+      this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: 10}));
+      this.store.dispatch(QuestionVoteActions.loadQuestionVotes());
+    
 
   }
+
+  // ngDoCheck(): void {
+
+  //   if(this.isAuthenticated.isAuthenticated()){
+
+  //     this.store.dispatch(UsersActions.loadUsers());
+  //     this.store.dispatch(AnswerVoteActions.loadAnswerVotes());
+  //     this.store.dispatch(TagsActions.loadTags());
+  //     this.store.dispatch(CompaniesActions.loadCompanies());
+  //     this.store.dispatch(CommentActions.loadComments());
+  //     this.store.dispatch(AnswerActions.loadAnswers());
+  //     this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: 10}));
+  //     this.store.dispatch(QuestionVoteActions.loadQuestionVotes());
+  //   }
+    
+  // }
 
 
 

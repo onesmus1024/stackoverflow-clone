@@ -61,15 +61,12 @@ export class SignupComponent implements OnInit {
         console.log(error.error.message);
         this.modalHost.viewContainerRef.clear();
         const modal = this.modalHost.viewContainerRef.createComponent(ModalComponent);
+        return;
       }
+     
+    })
 
    
-
-    }).add(() => {
-      this.signupForm.reset();
-      this.router.navigateByUrl('/login');
-    } 
-    );
 
   }
 

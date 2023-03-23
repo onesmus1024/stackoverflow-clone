@@ -5,6 +5,6 @@ export interface QuestionVote {
     vote: number;
     created_at: string;
     updated_at: string;
-    user: User;
+    user?: User;
     question_id: string;
 }

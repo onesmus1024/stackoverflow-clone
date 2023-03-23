@@ -6,6 +6,6 @@ export interface AnswerVote {
     vote: number;
     created_at: string;
     updated_at: string;
-    user: User;
+    user?: User;
     answer_id: string;
 }
