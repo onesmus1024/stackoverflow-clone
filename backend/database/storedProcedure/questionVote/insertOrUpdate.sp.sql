@@ -11,14 +11,14 @@ CREATE OR ALTER PROCEDURE insertOrUpdateQuestionVote
     @question_id VARCHAR ( 255 )
 AS
 BEGIN
-    IF EXISTS (SELECT * FROM question_votes WHERE id = @id)
+    IF EXISTS (SELECT * FROM question_votes WHERE user_id = @user_id AND question_id = @question_id )
     BEGIN
         UPDATE question_votes SET vote = @vote, updated_at = @updated_at WHERE id = @id
-        SELECT * FROM question_votes WHERE id = @id
+        SELECT * FROM question_votes WHERE user_id = @user_id AND question_id = @question_id
     END
     ELSE
     BEGIN
         INSERT INTO question_votes (id, vote, created_at, updated_at, user_id, question_id) VALUES (@id, @vote, @created_at, @updated_at, @user_id, @question_id)
-        SELECT * FROM question_votes WHERE id = @id
+        SELECT * FROM question_votes WHERE user_id = @user_id AND question_id = @question_id
     END
 END

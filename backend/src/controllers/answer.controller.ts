@@ -15,14 +15,14 @@ export const createAnswer: RequestHandler = async (req: Request, res: Response) 
 
     try {
 
-        const { answer, user_id, question_id, code,is_accepted,is_sent } = req.body;
+        const { answer, question_id, code,is_accepted,is_sent } = req.body;
    
         const answerModel = new AnswerModel(
             uuidv4(),
             answer,
             new Date().toISOString(),
             new Date().toISOString(),
-            user_id,
+            req.body.user.id,
             question_id,
             code,
             "0",

@@ -63,14 +63,20 @@ export const register = async (req: Request, res: Response) => {
             return res.status(201).json({ message: "User registered", token, user });
         }
         else {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(200).json({ message: "User not registered" });
         }
 
 
 
     }
     catch (err: any) {
-        res.status(500).json({ message: err.message });
+    
+        if (err.message.includes("email")) {
+            return res.status(400).json({ message: "Email already exists" });
+        }
+        else {
+            return res.status(500).json({ message: err.message });
+        }
     }
 
 }
@@ -79,14 +85,15 @@ export const register = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
     try {
         const { email, password } = req.body;
+        
 
         if (!db.checkConnection()) {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(500).json({ message: "Internal server error DB" });
         }
 
         const user: UserModel[] = await db.exec("getUserByEmail", { email: email }) as unknown as UserModel[];
 
-        if (!user) {
+        if (!user[0]) {
             return res.status(400).json({ message: "User not found" });
         }
 
@@ -174,7 +181,7 @@ export const updateUser = async (req: Request, res: Response) => {
         if (!user) {
             return res.status(400).json({ message: "User not found" });
         }
-        const { name, email, password } = req.body;
+        const { name, email, password,is_admin } = req.body;
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
        
@@ -187,7 +194,7 @@ export const updateUser = async (req: Request, res: Response) => {
             new Date(user[0].created_at).toISOString(),
             new Date().toISOString(),
             user[0].is_sent.toString()==='false'?'0':'1',
-            user[0].is_admin.toString()==='false'?'0':'1',
+            is_admin.toString(),
             user[0].is_deleted.toString()==='false'?'0':'1'
 
         );
@@ -217,17 +224,8 @@ export const updateUser = async (req: Request, res: Response) => {
             return res.status(200).json({ message: "User updated", user: updatedUser });
         }
         else {
-            return res.status(500).json({ message: "Internal server error" });
+            return res.status(200).json({ message: "User not updated" });
         }
-
-
-
-
-
-
-
-
-
 
 
     }

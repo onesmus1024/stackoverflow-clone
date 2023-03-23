@@ -13,7 +13,7 @@ CREATE OR ALTER PROCEDURE insertOrUpdateAnswerVote
     @answer_id VARCHAR ( 255 )
 AS
 BEGIN
-    IF EXISTS (SELECT * FROM answer_votes WHERE id = @id)
+    IF EXISTS (SELECT * FROM answer_votes WHERE  user_id = @user_id AND answer_id = @answer_id )
     BEGIN
         UPDATE answer_votes SET
             vote = @vote,
@@ -22,13 +22,13 @@ BEGIN
             user_id = @user_id,
             answer_id = @answer_id
         WHERE id = @id
-        SELECT * FROM answer_votes WHERE id = @id
+        SELECT * FROM answer_votes WHERE user_id = @user_id AND answer_id = @answer_id
     END
     ELSE
     BEGIN
         INSERT INTO answer_votes (id, vote, created_at, updated_at, user_id, answer_id)
         VALUES (@id, @vote, @created_at, @updated_at, @user_id, @answer_id)
-        SELECT * FROM answer_votes WHERE id = @id   
+        SELECT * FROM answer_votes WHERE user_id = @user_id AND answer_id = @answer_id
     END
 END
 

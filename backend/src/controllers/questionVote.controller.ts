@@ -17,13 +17,13 @@ export const createQuestionVote: RequestHandler = async (req: Request, res: Resp
             return res.status(500).json({ message: "Internal server error" });
         }
        
-        const { question_id, user_id, vote } = req.body;
+        const { question_id,vote } = req.body;
         const questionVoteModel = new QuestionVoteModel(
             uuidv4(),
-            vote,
+            vote as number,
             new Date().toISOString(),
             new Date().toISOString(),
-            user_id,
+            req.body.user.id,
             question_id
         );
 
@@ -103,20 +103,15 @@ export const updateQuestionVote: RequestHandler = async (req: Request, res: Resp
         }
         const questionVote:QuestionVoteModel[] = await db.exec("getQuestionVoteById", { id: req.params.id }) as unknown as QuestionVoteModel[];
         if (questionVote) {
-             // id: string;
-        // vote: number;
-        // created_at: string;
-        // updated_at: string;
-        // user_id: string;
-        // question_id: string;
-            const { question_id, user_id, vote } = req.body;
+     
+            const { question_id, vote } = req.body;
             const questionVoteModel = new QuestionVoteModel(
                 questionVote[0].id,
                 vote,
                 new Date(questionVote[0].created_at).toISOString(),
                 new Date().toISOString(),
                 question_id,
-                user_id,
+                req.body.user.id,
             );
             const { error } = validateQuestionVote(questionVoteModel);
             if (error) {

@@ -39,7 +39,7 @@ export const forgotPassword:RequestHandler  = async (req: Request, res: Response
             from: process.env.EMAIL,
             to: email,
             subject: "Reset Password Link",
-            text: `Click the link to reset your password: http://localhost:4200/reset-password/${user[0].id}/${token}`
+            text: `Click the link to reset your password: http://localhost:4200/home/reset-password/${user[0].id}/${token}`
         };
 
         await sendMail(messageOptions);

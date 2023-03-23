@@ -25,15 +25,17 @@ app.listen(process.env.PORT, () => {
 );
 
 
-// check after 1 minute
 
 
-cron.schedule('*/1 * * * *', async () => {
-   await sendWelcomeEmail();
+// run for every 10 seconds
+cron.schedule('*/10 * * * * *', async () => {
+    await sendWelcomeEmail();
 }
 );
 
-cron.schedule('*/1 * * * *', async () => {
+
+// run for every 10 seconds
+cron.schedule('*/10 * * * * *', async () => {
     await sendCongratulationEmail();
 }
 );

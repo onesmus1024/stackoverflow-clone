@@ -17,11 +17,12 @@ export const resetPassword:RequestHandler = async (req: Request, res: Response) 
         const {password} = req.body;
         const token = req.params.token;
         const id = req.params.id;
+        
 
         // verify token
         Jwt.verify(token, process.env.JWT_SECRET as string, (err, authData) => {
             if (err) {
-                res.sendStatus(403).json({ message: "Link has expired" });
+                return res.sendStatus(403).json({ message: "Link has expired" });
             } else {
                 req.body.user = authData;
             }
@@ -52,7 +53,7 @@ export const resetPassword:RequestHandler = async (req: Request, res: Response) 
             is_deleted: userFromDb[0].is_deleted
         };
 
-        const updatedUser:UserModel[] = await db.exec("updateUser", {...user}) as unknown as UserModel[];
+        const updatedUser:UserModel[] = await db.exec("insertOrUpdateUser", {...user}) as unknown as UserModel[];
 
         if (!updatedUser[0]) {
             return res.status(500).json({ message: "Internal server error" });

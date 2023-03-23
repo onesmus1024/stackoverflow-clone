@@ -16,7 +16,7 @@ export const createQuestion: RequestHandler = async (req: Request, res: Response
 
    try {
 
-     const { question, description, code, user_id,views } = req.body;
+     const { question, description, code,views } = req.body;
     const questionModel = new QuestionModel(
         uuidv4(),
         question,
@@ -24,7 +24,7 @@ export const createQuestion: RequestHandler = async (req: Request, res: Response
         code,
         new Date().toISOString(),
         new Date().toISOString(),
-        user_id,
+        req.body.user.id,
         views,
         "0"
     );
@@ -71,16 +71,32 @@ export const createQuestion: RequestHandler = async (req: Request, res: Response
 // get all questions
 
 export const getAllQuestions : RequestHandler = async (req: Request, res: Response) => {
-    
+
        try {
 
+        // interface for pagination
+        interface Pagination {
+            page: number;
+            pageSize: number;
+        }
+        // get page and pageSize from query params
+        const { page, pageSize } = req.query;
+
+        const pages: Pagination = {
+            page: page ? parseInt(page as string) : 1,
+            pageSize: pageSize ? parseInt(pageSize as string) : 10
+        };
+
+        // if page or pageSize is not provided use default values
+        const pageValue = page ? page : 1;
+        const pageSizeValue = pageSize ? pageSize : 10;
         // check for connection to db
         if (!db.checkConnection()) {
             return res.status(500).json({ message: "Internal server error" });
         }
         
 
-        const questions:Question[] =await (await db.exec("getAllQuestions", {page:'1',pageSize:'10'})) as Question[];
+        const questions:Question[] =await (await db.exec("getAllQuestions", {page: pages.page.toString(), pageSize: pages.pageSize.toString()}));
 
 
 
@@ -88,22 +104,33 @@ export const getAllQuestions : RequestHandler = async (req: Request, res: Respon
        
             const getFormattedQuestions = async (questions:Question[]) => {
                 return Promise.all(questions.map(async (question:Question) => {
-                    let answers = (await (await db.exec("getAnswersByQuestionId", { question_id: question.id })) as Answer[]).map(async (answer: Answer) => {
-                        let user = await db.exec("getUserById", { id: answer.user_id });
-                        let answerVotes = await db.exec("getAnswerVoteByAnswerId", { answer_id: answer.id });
-                        answer.votes = answerVotes;
-                        let answerComments = await db.exec("getAnswerCommentByAnswerId", { answer_id: answer.id });
-                        answer.comments = answerComments;
-                        answer.user = user[0];
-                        return answer;
+                    let questionVotes = await db.exec("getVotesByQuestionId", { question_id: question.id });
+                    question.votes =[]
+                    questionVotes.forEach((vote:any) => {
+                        question.votes.push(vote)
                     });
+                    const getAnswersForQuestionForQuestion = async (questionId:string) => {
+                            return Promise.all( ((await db.exec("getAnswersByQuestionId", { question_id: question.id })) as Answer[]).map(async (answer: Answer) => {
+                                let user = await db.exec("getUserById", { id: answer.user_id });
+                                let answerVotes = await db.exec("getAnswerVoteByAnswerId", { answer_id: answer.id });
+                                answer.votes =[]
+                                answerVotes.forEach((vote:any) => {
+                                    answer.votes.push(vote.vote)
+                                });
+                                let answerComments = await db.exec("getAnswerCommentByAnswerId", { answer_id: answer.id });
+                                answer.comments = answerComments;
+                                answer.user = user[0].name;
+                                console.log(answer)
+                                return answer;
+                            }))
+                    }
+
+                    let answers = await getAnswersForQuestionForQuestion(question.id);
                     question.answers = answers as unknown as Answer[];
                     let tags = await db.exec("getTagById", { id: question.tag_id });
                     question.tags = tags;
                     let user = await db.exec("getUserById", { id: question.user_id });
                     question.user = user[0];
-
-                    console.log(question)
 
                     return question;
                 }));
@@ -214,7 +241,7 @@ export const updateQuestion : RequestHandler = async (req: Request, res: Respons
     });
 
 
-    console.log(questionUpdated);
+
 
     if (questionUpdated) {
         // return question created
@@ -263,9 +290,9 @@ export const deleteQuestion : RequestHandler = async (req: Request, res: Respons
 export const increaseQuestionViews : RequestHandler = async (req: Request, res: Response) => {
 
     try{
-        const { id } = req.params;
+        const { question_id } = req.params;
 
-        const increased = db.exec("updateQuestionViews", { id });
+        const increased = db.exec("increaseQuestionViews", {question_id });
     
     
         if (increased) {
@@ -279,6 +306,12 @@ export const increaseQuestionViews : RequestHandler = async (req: Request, res: 
     }
 
 
+}
+
+
+
+function async(id: string) {
+    throw new Error("Function not implemented.");
 }
 
 

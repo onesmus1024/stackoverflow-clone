@@ -11,12 +11,12 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 export const createAnswerVote: RequestHandler = async (req: Request, res: Response) => {
     try {
-        const { user_id, answer_id, vote } = req.body;
+        const { answer_id, vote } = req.body;
         const answerVoteModel = new AnswerVoteModel(
             uuidv4(),
             new Date().toISOString(),
             new Date().toISOString(),
-            user_id,
+            req.body.user.id,
             answer_id,
             vote,
         );
@@ -118,7 +118,7 @@ export const updateAnswerVote: RequestHandler = async (req: Request, res: Respon
     try{
 
         const { id } = req.params;
-        const { user_id, answer_id, vote } = req.body;
+        const { answer_id, vote } = req.body;
         // get answer vote by id
 
         const answerVoteToBeUpdated:AnswerVoteModel[] = await db.exec("getAnswerVoteById", { id: id }) as unknown as AnswerVoteModel[];
@@ -128,7 +128,7 @@ export const updateAnswerVote: RequestHandler = async (req: Request, res: Respon
                 id,
                 new Date(answerVoteToBeUpdated[0].created_at).toISOString(),
                 new Date().toISOString(),
-                user_id,
+                req.body.user.id,
                 answer_id,
                 vote
             );

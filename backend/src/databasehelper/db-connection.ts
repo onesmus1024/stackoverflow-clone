@@ -18,6 +18,9 @@ class DatabaseConnect{
     createRequest(request:mssql.Request,data:{[x:string]:string|number}){
         let keys = Object.keys(data)
 
+        console.log("data",data)
+
+
      
         keys.map(keyName=>{
             request.input(keyName,data[keyName])
@@ -35,6 +38,7 @@ class DatabaseConnect{
 
         let request= this.createRequest(emptyRequest,data)
         let result = await (await request.execute(sp)).recordset
+        console.log("result",result)
     
         
 

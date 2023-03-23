@@ -11,14 +11,14 @@ dotenv.config({ path: path.join(__dirname, "../../.env") });
 export const createComment: RequestHandler = async (req: Request, res: Response) => {
     try{
 
-        const { comment, user_id, answer_id,is_deleted } = req.body;
+        const { comment, answer_id,is_deleted } = req.body;
 
         const commentModel = new CommentModel(
             uuidv4(),
             comment,
             new Date().toISOString(),
             new Date().toISOString(),
-            user_id,
+            req.body.user.id,
             answer_id,
             is_deleted
         );
@@ -118,7 +118,7 @@ export const updateComment: RequestHandler = async (req: Request, res: Response)
     try{
 
         const {id } = req.params;
-        const { comment, user_id, answer_id,is_deleted } = req.body;
+        const { comment, answer_id,is_deleted } = req.body;
         // get comment by id
         const commentToBeUpdated:CommentModel[] = await db.exec("getCommentById", { id: id }) as unknown as CommentModel[];
 
@@ -131,7 +131,7 @@ export const updateComment: RequestHandler = async (req: Request, res: Response)
             comment,
             new Date(commentToBeUpdated[0].created_at).toISOString(),
             new Date().toISOString(),
-            user_id,
+            req.body.user.id,
             answer_id,
             is_deleted
         );
