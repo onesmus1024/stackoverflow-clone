@@ -38,6 +38,7 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: 10}));
     this.store.select( selectQuestions).subscribe(questions => {
       this.questions =questions as Question[];
 

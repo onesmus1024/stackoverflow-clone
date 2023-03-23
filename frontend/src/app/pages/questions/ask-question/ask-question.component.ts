@@ -78,6 +78,9 @@ export class AskQuestionComponent implements OnInit {
       views: 0,
       ...this.askQuestionForm.value
     }));
+
+
+    this.router.navigate(['/home/questions']);
  
   }
 
