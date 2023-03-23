@@ -123,7 +123,7 @@ export const questionsReducer = createReducer(
             ...state,
             loading: false,
             questions: state.questions.map((q: Question) => {
-                q.answers = q.answers.map((a: Answer) => {
+                q.answers.map((a: Answer) => {
                     if (a.id === comment.answer_id) {
                         return {
                             ...a,
@@ -133,7 +133,6 @@ export const questionsReducer = createReducer(
                     return a;
                 }
                 )
-
                 return q;
             })
         }

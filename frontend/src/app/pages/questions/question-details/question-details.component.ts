@@ -158,5 +158,7 @@ export class QuestionDetailsComponent implements OnInit {
     console.log(comment)
 
     this.store.dispatch(QuestionsActions.addComment(comment))
+
+    this.router.navigate(['/home/questions', this.question.id])
   }
 }

@@ -121,7 +121,8 @@ pre{
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-areas:"answer-votes answer-description answer-description"
                         "answer-votes answer-code answer-code"
-                        "answer-votes post-your-comment post-your-comment";
+                        "answer-votes post-your-comment post-your-comment"
+                        "answer-votes comment comment";
     margin-bottom: 20px;
     border-top: 1px solid #92b3cb;
 
@@ -189,6 +190,20 @@ code{
     cursor: pointer;
 }
 
+.comment{
+    grid-area: comment;
+}
+
+.comment .comment-description{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #92b3cb;
+    padding: 20px;
+    background-color: #f5f5f5;
+
+}
 
 
 

@@ -63,8 +63,8 @@
         
             </div>
             <div class="comment" *ngIf="answer?.comments!.length > 0">
-                <p>Comments</p>
-                <div class="comment" *ngFor="let comment of answer?.comments">
+                <p>Comments ({{answer?.comments!.length}})</p>
+                <div *ngFor="let comment of answer?.comments">
                
                     <div class="comment-description">
                         <p>{{comment?.comment}}</p>
