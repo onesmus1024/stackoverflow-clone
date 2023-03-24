@@ -34,11 +34,11 @@
         <div class="post-your-answer">
             
             <form (ngSubmit)="postAnswer(question)" [formGroup]="answerForm">
-                <p>Post Your Answer</p>
+                <p *ngIf="!isUpdatingAnswer">Post Your Answer</p> <p *ngIf="isUpdatingAnswer">Update Your Answer</p>
                 <textarea name="answer" id="answer" formControlName="answer"></textarea>
-                <p>Post Your Code</p>
+                <p *ngIf="!isUpdatingAnswer" >Post Your Code</p> <p *ngIf="isUpdatingAnswer">Update Your Code</p>
                 <textarea name="code" id="code" formControlName="code"></textarea>
-                <button type="submit">Post Your Answer</button>
+                <button type="submit" *ngIf="!isUpdatingAnswer">Post Your Answer</button> <button type="submit" *ngIf="isUpdatingAnswer">Update Your Answer</button>    
             </form>
         </div>
     </div>

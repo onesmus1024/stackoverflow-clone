@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.state';
 import { Route } from '@angular/router';
 import * as QuestionsActions from 'src/app/state/actions/questions.actions';
+import { QuestionService } from 'src/app/services/question.service';
 
 
 
@@ -26,7 +27,7 @@ export class SingleQuestionComponent implements OnInit {
 
   @Input() question!: Question;
 
-  constructor(private store: Store<AppState>, private router: Router) { }
+  constructor(private store: Store<AppState>, private router: Router, private questionService: QuestionService) { }
 
   ngOnInit(): void {
 
@@ -54,7 +55,8 @@ export class SingleQuestionComponent implements OnInit {
   }
 
   updateQuestion(question :Question) {
-    console.log(question);
+    this.questionService.setQuestionToUpdate(question);
+    this.router.navigate(['/home/ask-question']);
   }
 
 

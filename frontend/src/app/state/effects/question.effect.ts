@@ -87,6 +87,13 @@ export class QuestionEffects {
         )),
     ));
 
+    updateQuestion$ = createEffect(() => this.actions$.pipe(
+        ofType(QuestionsActions.updateQuestion),
+        mergeMap((action) => this.questionService.updateQuestion(action.question).pipe(
+            map(question => QuestionsActions.updateQuestionSuccess(question )),
+            catchError(error => of(QuestionsActions.updateQuestionFailure({ error })))
+        )),
+    ));
 
 
 

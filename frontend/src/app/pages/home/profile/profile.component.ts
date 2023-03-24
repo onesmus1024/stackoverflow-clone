@@ -11,23 +11,34 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { selectQuestions } from 'src/app/state/selectors/question.selector';
 import { selectAnswers } from 'src/app/state/selectors/answer.selector';
+import { ReactiveFormsModule,FormBuilder,FormControl,FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
 
   user!: User;
+  updateProfileFormShow = false;
+  updateProfileForm!: FormGroup;
   answerThatBelongsToUser!: Answer[]
   questionThatBelongsToUser!: Question[]
   loggedInUserSub = new Subscription();
-  constructor(private store: Store<AppState>, private router: Router) { }
+  constructor(private store: Store<AppState>, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+
+    this.updateProfileForm = this.fb.group({
+      name: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
+      password_confirmation: new FormControl(''),
+      image_url: new FormControl('')
+    })
 
     this.loggedInUserSub = this.store.select(selectLoggedInUser).subscribe(user => {
       if (user == null) {
@@ -60,8 +71,24 @@ export class ProfileComponent {
 
     );
 
+    if(this.updateProfileFormShow){
+      this.updateProfileForm.patchValue({
+        name: this.user.user[0].name,
+        email: this.user.user[0].email,
+        password: this.user.user[0].password,
+        image_url: this.user.user[0].image_url
+      })
+    }
+
 
 
   }
 
+
+  updateProfile() {
+
+    console.log(this.updateProfileForm.value);
+
+
+  }
 }

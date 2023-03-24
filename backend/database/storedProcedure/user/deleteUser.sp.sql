@@ -14,3 +14,7 @@ BEGIN
     DELETE FROM users WHERE id = @id
    
 END
+
+-- delete user where email is jonathanndambuki16@gmail.com
+
+DELETE FROM users WHERE email = 'jonathanndambuki16@gmail.com'

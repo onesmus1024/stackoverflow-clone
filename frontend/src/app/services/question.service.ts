@@ -11,12 +11,31 @@ import { Answer } from '../interfaces/answer.interface';
   providedIn: 'root'
 })
 export class QuestionService {
-
-
-
-  
-
+  isQuestionUpdated = false;
+  isAnswerUpdated = false;
+  questionToUpdate!: Question;
+  answerToUpdate!: Answer;
   constructor(private http: HttpClient) { }
+
+
+  setQuestionToUpdate(question: Question) {
+    this.questionToUpdate = question;
+    this.isQuestionUpdated = true;
+  }
+
+  setAnswerToUpdate(answer: Answer) {
+    this.answerToUpdate = answer;
+    this.isAnswerUpdated = true;
+  }
+
+
+  getQuestionToUpdate() {
+    return this.questionToUpdate;
+  }
+
+  getAnswerToUpdate() {
+    return this.answerToUpdate;
+  }
 
   getQuestions(page = 1, pageSize = 1): Observable<Question[]> {
     // include query params in the url of page and pageSize
@@ -69,6 +88,10 @@ export class QuestionService {
 
   deleteQuestion(question: Question): Observable<Question> {
     return this.http.delete<Question>(`http://localhost:4000/api/questions/${question.id}`);
+  }
+
+  updateQuestion(question: Question): Observable<Question> {
+    return this.http.put<Question>(`http://localhost:4000/api/questions/${question.id}`, question);
   }
        
 }

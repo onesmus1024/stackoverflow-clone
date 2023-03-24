@@ -27,14 +27,16 @@ import { User } from 'src/app/interfaces/user.interface';
   templateUrl: './question-details.component.html',
   styleUrls: ['./question-details.component.css']
 })
-export class QuestionDetailsComponent implements OnInit{
+export class QuestionDetailsComponent implements OnInit {
   questionVotesSum: number = 0;
+  isUpdatingAnswer = false;
   answerVotesSum: number = 0;
   questionVoteUp = false;
   questionVoteDown = false;
   answerVoteUp = false;
   answerVoteDown = false;
   user!: User;
+  answerToUpdate!: Answer;
 
   su = new Subscription();
   viewincrementsu = new Subscription();
@@ -89,7 +91,7 @@ export class QuestionDetailsComponent implements OnInit{
 
   ngOnInit(): void {
     // load questions
-    this.store.dispatch(QuestionsActions.loadQuestions({page: 1, pageSize: 10}))
+    this.store.dispatch(QuestionsActions.loadQuestions({ page: 1, pageSize: 10 }))
     this.su.add(this.route.params.subscribe(params => {
       this.allQuestionSu.add(this.store.select(selectQuestions).subscribe(questions => {
         this.question = questions.find((question: Question) => question.id === params['id']) as Question;
@@ -122,6 +124,11 @@ export class QuestionDetailsComponent implements OnInit{
 
     this.su.unsubscribe()
 
+    this.isUpdatingAnswer = this.questionService.isAnswerUpdated
+
+    this.answerToUpdate = this.questionService.getAnswerToUpdate()
+
+
 
 
 
@@ -141,32 +148,45 @@ export class QuestionDetailsComponent implements OnInit{
     // check if user has already voted
     let userVote = question.votes.find(vote => vote.user_id === this.user.user[0].id)
     // check if user has already voted up and is voting up again
-    if (this.questionVoteUp = true && vote === 1) {
+    if (vote === 1 && userVote?.vote ===1){
       alert('You have already voted up')
       return
     }
     // check if user has already voted down and is voting down again
-    if (this.questionVoteDown === true ) {
-  
+    if (this.questionVoteDown === true && userVote?.vote === -1) {
+
       alert('You have already voted down')
       return
     }
 
-    if (vote===-1) {
+    if (vote === -1) {
       this.questionVoteDown = true
       this.questionVoteUp = false
     }
-    if (vote===1) {
+    if (vote === 1) {
       this.questionVoteUp = true
       this.questionVoteDown = false
     }
-    
+
     this.questionVotesSum += vote
     this.store.dispatch(QuestionsActions.addQuestionVote(voteQuestion))
     this.router.navigate(['/home/questions', this.question.id])
   }
 
   postAnswer(question: Question) {
+
+    if (this.isUpdatingAnswer) {
+      console.log({ ...this.answerToUpdate, answer: this.answerForm.value.answer, code: this.answerForm.value.code });
+
+      this.store.dispatch(QuestionsActions.updateAnswer({ ...this.answerToUpdate, answer: this.answerForm.value.answer, code: this.answerForm.value.code }))
+
+      this.questionService.isAnswerUpdated = false
+      this.isUpdatingAnswer = false
+      this.router.navigate(['/home/questions'])
+      return
+    }
+
+
 
     let answer: Answer
     answer = {
@@ -184,6 +204,8 @@ export class QuestionDetailsComponent implements OnInit{
     this.store.dispatch(QuestionsActions.addAnswer(answer))
 
     this.router.navigate(['/home/questions'])
+
+
 
 
 
@@ -207,17 +229,17 @@ export class QuestionDetailsComponent implements OnInit{
       return
     }
     // check if user has already voted down and is voting down again
-    if (this.answerVoteDown === true ) {
+    if (this.answerVoteDown === true) {
 
       alert('You have already voted down')
       return
     }
 
-    if (vote===-1) {
+    if (vote === -1) {
       this.answerVoteDown = true
       this.answerVoteUp = false
     }
-    if (vote===1) {
+    if (vote === 1) {
       this.answerVoteUp = true
       this.answerVoteDown = false
     }
@@ -251,11 +273,23 @@ export class QuestionDetailsComponent implements OnInit{
   }
 
   editAnswer(answer: Answer) {
-    console.log(answer);
+    console.log(answer)
+    this.questionService.isAnswerUpdated = true
+    this.isUpdatingAnswer = true
+    this.questionService.setAnswerToUpdate(answer)
+    this.answerToUpdate = answer
+    this.router.navigate(['/home/questions', this.question.id])
+
+    // prefill form with answer
+    this.answerForm.patchValue({
+      answer: answer.answer,
+      code: answer.code
+    })
+
   }
 
   markAccepted(answer: Answer) {
-    this.store.dispatch(QuestionsActions.updateAnswer({...answer, is_accepted: '1',is_sent: '0'}))
+    this.store.dispatch(QuestionsActions.updateAnswer({ ...answer, is_accepted: '1', is_sent: '0' }))
   }
-    
+
 }

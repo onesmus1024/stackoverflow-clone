@@ -1,14 +1,15 @@
-<div class="profile">
+<div class="profile" *ngIf="!updateProfileFormShow">
     <div class="user">
         <div class="avatar">
             <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="avatar">
         </div>
         <div class="name">
-            <h1>{{user.user[0].name}}</h1>
+            <p>{{user.user[0].name}}</p>
         </div>
         <div class="email">
             <p>{{user.user[0].email}}</p>
         </div>
+        <button (click)="updateProfileFormShow = !updateProfileFormShow" class="btn btn-primary">Update Profile</button>
     </div>
     <div class="answers">
         <div class="header">
@@ -44,4 +45,32 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<!-- form  to update user -->
+
+<div class="update-profile" *ngIf="updateProfileFormShow">
+    <p>Update Profile</p>
+
+    <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
+        <!-- add profile image_url -->
+        <div class="form-group">
+            <label for="image_url">Image Url</label>
+            <input type="text" class="form-control" id="image_url" formControlName="image_url" placeholder="Enter image url">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 </div>

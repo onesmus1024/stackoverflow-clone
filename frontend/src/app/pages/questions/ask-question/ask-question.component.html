@@ -40,7 +40,11 @@
                 <span *ngIf="askQuestionForm.get('tags')?.hasError('required') && askQuestionForm.get('tags')?.touched" class="error">Tags is required</span>
 
             </div>
-            <button type="submit">Submit</button>
+        
+            <button type="submit" *ngIf="!isUpdating" >Add Question</button>
+          
+            <button type="submit" *ngIf="isUpdating" [disabled]="askQuestionForm.invalid">Update Question</button>
+
         </form>
     </div>
 </div>

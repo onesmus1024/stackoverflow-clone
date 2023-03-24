@@ -17,8 +17,7 @@ CREATE TABLE questions
     tag_id VARCHAR ( 255 ) NOT NULL DEFAULT  '53dc6a4e-2aa9-414a-b95e-a0e7d6156998',
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (tag_id) REFERENCES tags(id),
-    CONSTRAINT FK_questions_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    CONSTRAINT FK_questions_tag_id_tags_id FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
+
 );
 
 
@@ -28,6 +27,23 @@ ALTER TABLE questions
 ADD tag_id VARCHAR ( 255 ) NOT NULL DEFAULT  '53dc6a4e-2aa9-414a-b95e-a0e7d6156998' ,
 FOREIGN KEY (tag_id) REFERENCES tags(id),
 CONSTRAINT FK_questions_tag_id_tags_id FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE;
+
+
+-- drop all the constraints in the question table
+
+ALTER TABLE questions
+DROP CONSTRAINT FK_questions_user_id_users_id
+
+ALTER TABLE questions
+DROP CONSTRAINT FK_questions_tag_id_tags_id
+
+
+-- add constraints to the question table when user is deleted to delete all the questions
+
+ALTER TABLE questions
+ADD CONSTRAINT FK_questions_user_id_users_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
+
+
 
 
 

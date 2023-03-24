@@ -25,24 +25,42 @@ import * as QuestionsActions from '../../../state/actions/questions.actions';
 })
 export class AskQuestionComponent implements OnInit {
   askQuestionForm:FormGroup;
+  isUpdating = false;
   tags:Tag[] = [];
+  questionToUpdate!:Question 
   constructor(private router: Router, private questionService: QuestionService, private fb: FormBuilder, private store: Store<AppState>) { 
 
     this.askQuestionForm = this.fb.group({
       question: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required),
       code: new FormControl('', Validators.required),
-  
       tag: new FormControl('', Validators.required)
     });
   
   }
+
+  // if is updating, then get the question from the service and set the form values
+
+
 
 
   ngOnInit(): void {
     this.store.select(selectTags).subscribe(tags => {
       this.tags = tags as Tag[];
     });
+
+    this.isUpdating=this.questionService.isQuestionUpdated 
+
+    if(this.isUpdating)
+    {
+      this.questionToUpdate = this.questionService.questionToUpdate;
+      this.askQuestionForm.setValue({
+        question: this.questionToUpdate.description,
+        description: this.questionToUpdate.description,
+        code: this.questionToUpdate.code,
+        tag: this.questionToUpdate.tags[0].id
+      });
+    }
 
   }
 
@@ -57,8 +75,17 @@ export class AskQuestionComponent implements OnInit {
     //   return;
     // }
 
-    console.log(this.askQuestionForm.value);
+    if(this.isUpdating)
+    {
 
+      this.store.dispatch(QuestionsActions.updateQuestion({...this.questionToUpdate, ...this.askQuestionForm.value}));
+      this.questionService.isQuestionUpdated = false;
+      this.askQuestionForm.reset();
+      this.router.navigate(['/home/questions']);
+      return;
+    }
+
+ 
     this.store.dispatch(QuestionsActions.addQuestion({
       id: '',
       description: '',
